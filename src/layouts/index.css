@@ -674,20 +674,16 @@ pre tt:after {
   background-repeat: no-repeat;
 }
 .border-top{
-  background-image: url(/border.svg);
   top: 0;
 }
 .border-bottom{
-  background-image: url(/border-bottom.svg);
   bottom: 0;
 }
 .logo{
   width: 85px;
   height: 85px;
-  background-image: url(/logo-full.png);
 }
 .top-left-animation{
-  background-image: url(/days.svg);
   margin-right: auto;
   position: absolute;
   top: 100px;
@@ -698,7 +694,6 @@ pre tt:after {
   animation: rotate-540 55000ms linear infinite reverse;
 }
 .bottom-right-animation{
-  background-image: url(/patio.svg);
   margin-right: auto;
   position: absolute;
   bottom: 100px;
