@@ -622,3 +622,89 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+
+
+/* Splash Styles
+------------------------------------------- */
+@mixin animation($name, $duration, $easing, $fill-mode: null, $direction: null){
+  animation: $name $duration $easing $fill-mode $direction;
+}
+@mixin rotate($rotateTo){
+  @keyframes rotate-$rotateTo{
+    to{transform:rotate($rotateTo + 0deg)}
+  }
+}
+
+@keyframes rotate-360{
+  to{transform:rotate(360deg)}
+}
+@keyframes rotate-540{
+  to{transform:rotate(540deg)}
+}
+@keyframes rotate-405{
+  to{transform:rotate(405deg)}
+}
+@keyframes rotate-480{
+  to{transform:rotate(480deg)}
+}
+@keyframes rotate-540{
+  to{transform:rotate(540deg)}
+}
+.standard-background-image{
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.container{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+.border{
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 65px;
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+.border-top{
+  background-image: url(/assets/border.svg);
+  top: 0;
+}
+.border-bottom{
+  background-image: url(/assets/border-bottom.svg);
+  bottom: 0;
+}
+.logo{
+  width: 85px;
+  height: 85px;
+  background-image: url(/assets/logo-full.png);
+}
+.top-left-animation{
+  background-image: url(/assets/days.svg);
+  margin-right: auto;
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  width: 150px;
+  height: 150px;
+  transform: rotate(-180deg);
+  animation: rotate-540 55000ms linear infinite reverse;
+}
+.bottom-right-animation{
+  background-image: url(/assets/patio.svg);
+  margin-right: auto;
+  position: absolute;
+  bottom: 100px;
+  right: 50px;
+  width: 150px;
+  height: 150px;
+  animation: rotate-360 50000ms linear infinite;
+}
+
