@@ -651,6 +651,9 @@ pre tt:after {
 @keyframes rotate-540{
   to{transform:rotate(540deg)}
 }
+html{
+  cursor: url(../assets/cursor.svg), auto;
+}
 .standard-background-image{
   background-position: center;
   background-size: contain;
@@ -695,8 +698,8 @@ pre tt:after {
   left: 50px;
   width: 150px;
   height: 150px;
-  transform: rotate(-180deg);
-  animation: rotate-540 55000ms linear infinite reverse;
+  // transform: rotate(-180deg);
+  animation: rotate-360 50000ms linear infinite reverse;
 }
 .bottom-right-animation{
   margin-right: auto;
