@@ -2,9 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
-
-const Header = () =>
-  <div/>
+import Header from '../components/header.js'
 
 const TemplateWrapper = ({ children }) =>
   <div>
@@ -16,6 +14,7 @@ const TemplateWrapper = ({ children }) =>
         { name: 'robots', content: 'index, follow' },
         { name: 'revisit-after', content: '1 month' },
         { name: 'msapplication-tap-highlight', content: 'no' },
+        { name: 'theme-color', content: '#2F3BA2' },
       ]}
     />
     <Header />
