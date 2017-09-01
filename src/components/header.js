@@ -1,26 +1,27 @@
 import React from 'react'
-import Logo from './logo'
-import Pattern from './pattern'
 import styled from 'styled-components'
 
-const LogoContainer = styled.div`
-  position: fixed;
-  top: 50px;
-  left: 50px;
-`
-const PatternContainer = styled.div`
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0;
+import Media from '../styleComponents/mediaQueries.js'
+import Logo from './logo'
+import Pattern from './pattern'
+
+const height = 80
+
+const HeaderContainer = styled.div`
+  height: ${height}px;
+  ${Media.forTabletPortraitUp`
+    height: ${height*1.20+`px`};
+  `}
+  ${Media.forTabletLandscapeUp`
+    height: ${height*1.30+`px`};
+  `}
 `
 
 const Header = () =>
-  <div>
-    <Pattern />
-    <LogoContainer>
-      <Logo />
-    </LogoContainer>
-  </div>
+  <HeaderContainer>
+    <Pattern 
+      height={height}/>
+    <Logo />
+  </HeaderContainer>
 
 export default Header

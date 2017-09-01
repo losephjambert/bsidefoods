@@ -4,6 +4,8 @@ import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import Header from '../components/header.js'
 
+import 'normalize.css';
+
 const TemplateWrapper = ({ children }) =>
   <div>
     <Helmet
