@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `B~Side Foods`,
   },
   plugins: [
     {
@@ -11,6 +11,8 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
-     'gatsby-plugin-catch-links',
+     `gatsby-plugin-catch-links`,
+     `gatsby-plugin-styled-components`,
+     `gatsby-plugin-favicon`,
   ],
 }
