@@ -15,10 +15,7 @@ const PatternContainer = styled.div`
   height: ${props => props.height+`px` || 'initial'};
 
   ${Media.forTabletPortraitUp`
-    height: ${props => props.height*1.20+`px` || 'initial'};
-  `}
-  ${Media.forTabletLandscapeUp`
-    height: ${props => props.height*1.30+`px` || 'initial'};
+    height: ${props => props.height*1.10+`px` || 'initial'};
   `}
 `
 

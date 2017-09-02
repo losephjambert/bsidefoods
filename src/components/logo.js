@@ -27,10 +27,6 @@ const LogoContainer = styled.div`
     width: ${size*1.7}px;
     height: ${size*1.7}px;
   `}
-  ${Media.forTabletLandscapeUp`
-    width: ${size*1.5}px;
-    height: ${size*1.5}px;
-  `}
   ${Media.forDesktopUp`
     width: ${size*1.75}px;
     height: ${size*1.75}px;

@@ -10,10 +10,7 @@ const height = 80
 const HeaderContainer = styled.div`
   height: ${height}px;
   ${Media.forTabletPortraitUp`
-    height: ${height*1.20+`px`};
-  `}
-  ${Media.forTabletLandscapeUp`
-    height: ${height*1.30+`px`};
+    height: ${height*1.10+`px`};
   `}
 `
 
