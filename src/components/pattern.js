@@ -1,9 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import Styled from 'styled-components'
 import Media from '../styleComponents/mediaQueries.js'
 import wave from '../assets/wave.svg'
 
-const PatternContainer = styled.div`
+const PatternContainer = Styled.div`
   position: fixed;
   top: 0;
   left: 0;

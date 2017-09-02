@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
-import styled from 'styled-components'
+import Styled from 'styled-components'
 import Header from '../components/header.js'
 
-const Container = styled.div`
+const Container = Styled.div`
   background-color: lightgray;
 `
 

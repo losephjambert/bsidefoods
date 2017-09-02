@@ -1,7 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import Styled from 'styled-components'
 
-const Container = styled.ul`
+const Container = Styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 10px;

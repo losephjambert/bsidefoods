@@ -1,9 +1,11 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import ScrollComponent from '../components/scrollComponent.js'
-import FoodItem from '../components/foodItem.js'
-import DrinkItem from '../components/drinkItem.js'
-import BusinessInformation from '../components/businessInformation.js'
+import ScrollComponent from '../components/scrollComponent'
+import FoodItem from '../components/foodItem'
+import DrinkItem from '../components/drinkItem'
+import BusinessInformation from '../components/businessInformation'
+import MenuSection from '../styleComponents/menuSection'
+
 
 class IndexPage extends React.Component{
   
@@ -15,10 +17,17 @@ class IndexPage extends React.Component{
 
     return(
       <div>
-    
-        { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
-        { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
-        { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
+        <ScrollComponent>
+          <MenuSection>
+            { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
+          </MenuSection>
+          <MenuSection>
+            { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
+          </MenuSection>
+          <MenuSection>
+            { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
+          </MenuSection>
+        </ScrollComponent>
       </div>
     )
   }

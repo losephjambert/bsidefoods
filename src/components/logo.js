@@ -1,11 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
+import Styled from 'styled-components'
 import Media from '../styleComponents/mediaQueries.js'
 import LogoFile from '../assets/logo.png'
 
 const size = 100
 
-const LogoContainer = styled.div`
+const LogoContainer = Styled.div`
   position: fixed;
   top: ${size/6}px;
   left: ${size/9}px;
