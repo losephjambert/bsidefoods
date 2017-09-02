@@ -15,6 +15,7 @@ class IndexPage extends React.Component{
 
     return(
       <div>
+    
         { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
         { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
         { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
