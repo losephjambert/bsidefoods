@@ -31,11 +31,9 @@ export const getContent = graphql`
         node{
           id
           name
-          price
           ingredients
-          labels{
-            label
-          }
+          labels
+          prices
         }
       }
     }
@@ -44,7 +42,8 @@ export const getContent = graphql`
         node{
           id
           name
-          price
+          labels
+          prices
         }
       }
     }
