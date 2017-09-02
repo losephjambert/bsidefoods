@@ -8,14 +8,13 @@ class IndexPage extends React.Component{
     const foods = this.props.data.allContentfulFood.edges
     const drinks = this.props.data.allContentfulDrink.edges
     const information = this.props.data.allContentfulBusinessInformation.edges
+    const data = {foods, drinks, information}
 
     return(
       <div>
         <ScrollComponent 
-          foods={foods}
-          drinks={drinks}
+          data={data}
           />
-        {/*<Link to="/page-2/">Menu</Link>*/}
       </div>
     )
   }
