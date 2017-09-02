@@ -2,12 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
+import styled from 'styled-components'
 import Header from '../components/header.js'
+
+const Container = styled.div`
+  background-color: lightgray;
+`
 
 import 'normalize.css';
 
 const TemplateWrapper = ({ children }) =>
-  <div>
+  <Container>
     <Helmet
       title="B-side Foods | Seattle"
       meta={[
@@ -23,7 +28,7 @@ const TemplateWrapper = ({ children }) =>
     <div>
       {children()}
     </div>
-  </div>
+  </Container>
 
 TemplateWrapper.propTypes = {
   children: PropTypes.func,

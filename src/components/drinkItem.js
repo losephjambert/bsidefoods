@@ -4,7 +4,7 @@ class DrinkItem extends React.Component{
   
   render(){
 
-    const { data } = this.props
+    const data = this.props.data
 
     return(
       <div>
@@ -16,18 +16,3 @@ class DrinkItem extends React.Component{
 }
 
 export default DrinkItem
-
-export const getDrink = graphql`
-  query GetDrink {
-    allContentfulDrink{
-      edges {
-        node{
-          id
-          name
-          labels
-          prices
-        }
-      }
-    }
-  }
-`

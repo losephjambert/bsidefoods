@@ -1,33 +1,29 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const Container = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+  background-color: dodgerblue;
+  border: 5px solid ghostwhite;
+  color: ghostwhite;
+`
 
 class BusinessInformation extends React.Component{
   
   render(){
-
-    const { data } = this.props
+    
+    const { data } = this.props
 
     return(
-      <div>
-        bidness
-      </div>
+      <Container>
+        <li>{data.headline}</li>
+        { data.hours.map(( hour, i) => <li key={i}>{ hour }</li> ) }
+      </Container>
     )
   }
 
 }
 
 export default BusinessInformation
-
-export const getBusinessInformation = graphql`
-  query GetBusinessInformation {
-    allContentfulBusinessInformation{
-      edges {
-        node{
-          id
-          businessName
-          headline
-          hours
-        }
-      }
-    }
-  }
-`
