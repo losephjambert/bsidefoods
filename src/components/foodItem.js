@@ -8,6 +8,7 @@ const Container = Styled.ul`
   background-color: lightpink;
   border: 5px solid ghostwhite;
   color: ghostwhite;
+  min-height: inherit;
 `
 
 class FoodItem extends React.Component{

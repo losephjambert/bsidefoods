@@ -1,33 +1,42 @@
 import React from 'react'
+import {FlexColumn} from '../styleComponents/flex'
 
 export default class ScrollComponent extends React.Component {
 
   constructor(props){
     super(props)
-    this.state={
-      height: null
-    }
+
     this.scrollItems=[]
-    this.newScrollHeight = this.newScrollHeight.bind(this)
     this.createScrollSystem = this.createScrollSystem.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
   }
 
   componentDidMount(){
     this.createScrollSystem(0,this.refs.node)
-    console.log(this.scrollItems)
+    window.addEventListener('scroll',  (e)=>this.handleScroll(e,this.refs.node) )
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 
   render() {
 
     return (
-      <div ref='node'>
+      <div
+        ref='node'
+        style={{backgroundColor:'salmon'}}>
         {this.props.children}
       </div>
     )
+
   }
 
-  newScrollHeight(newHeight){
-    this.config.scrollHeight = newHeight
+  handleScroll(e,node){
+    let scrollDistance = window.scrollY
+    if(node){
+      console.log( Math.ceil(scrollDistance) + window.innerHeight, Math.ceil( node.getBoundingClientRect().height ) )
+    }
   }
 
   createScrollSystem(accumulator, node) {
@@ -35,7 +44,6 @@ export default class ScrollComponent extends React.Component {
     if(node){
       let children = node.children
       for(let i=0; i<children.length; i++){
-        console.log(children[i])
         let height = children[i].getBoundingClientRect().height
         accumulator=accumulator+height+Math.ceil(window.innerHeight*.5 - (i*-40) )
         let scrollItem = {

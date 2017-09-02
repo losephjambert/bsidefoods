@@ -8,6 +8,7 @@ const Container = Styled.ul`
   background-color: dodgerblue;
   border: 5px solid ghostwhite;
   color: ghostwhite;
+  min-height: inherit;
 `
 
 class BusinessInformation extends React.Component{

@@ -8,7 +8,7 @@ import Pattern from './pattern'
 const height = 80
 
 const HeaderContainer = Styled.div`
-  height: ${height*3}px;
+
 `
 
 const Header = () =>
