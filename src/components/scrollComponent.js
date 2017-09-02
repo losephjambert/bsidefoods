@@ -1,4 +1,5 @@
 import React from 'react'
+import ScrollItem from './scrollItem'
 
 export default class ScrollComponent extends React.Component {
 
@@ -12,8 +13,11 @@ export default class ScrollComponent extends React.Component {
   }
 
   render() {
+
     return (
-     <div></div>
+      <div>
+
+      </div>
     )
   }
 }

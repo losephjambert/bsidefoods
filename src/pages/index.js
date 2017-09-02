@@ -1,20 +1,19 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import ScrollComponent from '../components/scrollComponent.js'
+import FoodItem from '../components/foodItem.js'
+import DrinkItem from '../components/drinkItem.js'
+import BusinessInformation from '../components/businessInformation.js'
 
 class IndexPage extends React.Component{
   
   render(){
-    const foods = this.props.data.allContentfulFood.edges
-    const drinks = this.props.data.allContentfulDrink.edges
-    const information = this.props.data.allContentfulBusinessInformation.edges
-    const data = {foods, drinks, information}
 
     return(
       <div>
-        <ScrollComponent 
-          data={data}
-          />
+        <BusinessInformation />
+        <FoodItem />
+        <DrinkItem />
       </div>
     )
   }
@@ -22,39 +21,3 @@ class IndexPage extends React.Component{
 }
 
 export default IndexPage
-
-export const getContent = graphql`
-  query GetContent {
-    allContentfulFood{
-      edges {
-        node{
-          id
-          name
-          ingredients
-          labels
-          prices
-        }
-      }
-    }
-    allContentfulDrink{
-      edges {
-        node{
-          id
-          name
-          labels
-          prices
-        }
-      }
-    }
-    allContentfulBusinessInformation{
-      edges {
-        node{
-          id
-          businessName
-          headline
-          hours
-        }
-      }
-    }
-  }
-`
