@@ -13,12 +13,6 @@ const DrinkItem = ({ node }) =>
   <div key={node.id}>
     <div>{node.name}</div>
     <div>${node.price}</div>
-    <div>
-    { node.sizes.map(( size, i) => 
-      size !== 'no size' &&
-      <div key={i}>{ size }</div>
-    )}
-    </div>
   </div>
 
 class SecondPage extends React.Component {
@@ -65,7 +59,6 @@ export const pageQuery = graphql`
           id
           name
           price
-          sizes
         }
       }
     }
