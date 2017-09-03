@@ -117,7 +117,6 @@ export default class ScrollContainer extends React.Component {
   }
 
   createScrollSystem(accumulator, node) {
-    console.log('createScrollSystem')
     const {scrollItems} = this.config
     if(node){
       let children = node.children
@@ -135,6 +134,7 @@ export default class ScrollContainer extends React.Component {
         children[i].style.transform=`translate3d(${i*8}%,${0}%,${0})`
       }
       node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight)}px`
+      node.style.boxShadow=`inset 0 0 0 20px ghostwhite`
       this.config.container=node
       this.config.children=children
     }

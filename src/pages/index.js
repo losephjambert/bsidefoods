@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import ScrollContainer from '../components/scrollContainer'
+import ScrollContainerObservable from '../components/scrollContainerObservable'
 
 class IndexPage extends React.Component{
   
@@ -11,7 +12,13 @@ class IndexPage extends React.Component{
     const businessInformation = this.props.data.allContentfulBusinessInformation.edges
 
     return(
-      <ScrollContainer foods={foods} drinks={drinks} businessInformation={businessInformation}/>
+      <div>
+        <ScrollContainerObservable
+          values={["State.", "Should.", "Be.", "Synchronous."]} 
+          onSelect={value => console.log(value)}
+          onScroll={(e) => console.log(e)}/>
+        <ScrollContainer foods={foods} drinks={drinks} businessInformation={businessInformation}/>
+      </div>
     )
   }
 
