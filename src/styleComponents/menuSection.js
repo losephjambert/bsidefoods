@@ -1,7 +1,7 @@
 import Styled from 'styled-components'
 
 const MenuSection = Styled.section`
-  position: fixed;
+  position: ${props=>props.active ? 'relative' : 'fixed'};
   width: 100%;
   max-width: 750px;
   min-height: 600px;
