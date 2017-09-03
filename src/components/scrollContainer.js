@@ -1,20 +1,24 @@
 import React from 'react'
 import {FlexColumn} from '../styleComponents/flex'
+import FoodItem from './foodItem'
+import DrinkItem from './drinkItem'
+import BusinessInformation from './businessInformation'
+import MenuSection from '../styleComponents/menuSection'
 
 export default class ScrollContainer extends React.Component {
 
   constructor(props){
     super(props)
-    this.state={
-      activePanel: null
-    }
 
     this.config={
       lastScrollTop:0,
-      direction: null
+      direction: null,
+      currentIndex: null,
+      container: null,
+      children: null,
+      scrollItems:[],
+      show: false
     }
-
-    this.scrollItems=[]
 
     this.handleScroll = this.handleScroll.bind(this)
     this.handleDirection = this.handleDirection.bind(this)
@@ -24,7 +28,8 @@ export default class ScrollContainer extends React.Component {
 
   componentDidMount(){
     window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
-    this.setState({ activePanel: this.scrollItems.length-1 })
+
+    this.config.currentIndex=0
   }
 
   componentWillUnmount() {
@@ -33,44 +38,66 @@ export default class ScrollContainer extends React.Component {
 
   render() {
 
-    const { activePanel,direction }=this.state
+    const {foods,drinks,businessInformation}=this.props
 
     return (
       <FlexColumn
         innerRef={(node)=>this.createScrollSystem(0,node)}
         justify={'flex-start'}
-        align={'center'}
-        style={{backgroundColor:'salmon', boxShadow:'inset 0 0 0 15px white'}}>
-          {this.props.children}
+        align={'center'}>
+          <MenuSection>
+            { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
+          </MenuSection>
+          <MenuSection>
+            { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
+          </MenuSection>
+          <MenuSection>
+            { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
+          </MenuSection>
       </FlexColumn>
     )
 
   }
 
   handlePanes(){
-    const {direction}=this.config
-    const {activePanel}=this.state
-    console.log(direction)
-    // console.log(`active panel:`, this.state.children[this.state.activePanel])
-    // console.log(this.state.children[this.state.activePanel].classList)
-    // const {activePanel}=this.state
-    // const {scrollItems}=this
-    // let currentPanel = scrollItems[activePanel].spaceFromTop + scrollItems[activePanel].height
-    
-    // if(scrollDistance > currentPanel){
-    //   console.log('release next panel, decrement activePanel by 1')
-    //   this.setState((prevState) => {
-    //     return {activePanel: prevState.activePanel - 1}
-    //   })
-    // }
+    const {direction, currentIndex, container, children, scrollItems}=this.config
+    const scrollDistance=window.scrollY
+    let currentPanel = scrollItems[currentIndex].spaceFromTop + scrollItems[currentIndex].height
+    console.log(children[0].style)
+    children[0].style.position='relative'
+    container.style.backgroundColor='dodgerblue'
 
-    // console.log(`
-    //   scroll distance:${scrollDistance}
-    //   client height:${document.body.clientHeight - window.innerHeight}
-    //   panel${activePanel}:${currentPanel}
-    // `)
+    if(window.scrollY <= 0){
+      container.style.backgroundColor='ghostwhite'
+    }
 
-    // console.log( Math.ceil(scrollDistance) + window.innerHeight, Math.ceil( this.state.container.getBoundingClientRect().height ) )
+    if(children[0].getBoundingClientRect().top){
+        this.config.currentIndex=0
+        container.style.backgroundColor='dodgerblue'
+      }
+    if(children[0].getBoundingClientRect().bottom <= 0){
+      children[1].style.position='relative'
+      container.style.backgroundColor='lightpink'
+      this.config.currentIndex=1
+      if(children[1].getBoundingClientRect().bottom <= 0){
+        children[2].style.position='relative'
+        container.style.backgroundColor='palegoldenrod'
+        this.config.currentIndex=2
+      }
+    }
+    if(children[2].getBoundingClientRect().top >= 0 && direction==='up'){
+      children[2].style.position='fixed'
+      if(children[1].getBoundingClientRect().top >= 0){
+        children[1].style.position='fixed'
+      }  
+    }
+    if(children[2].getBoundingClientRect().bottom <=0){
+      this.config.show=!this.config.show
+      container.style.backgroundColor='ghostwhite'
+    } else{
+      this.config.show=!this.config.show
+    }
+
   }
 
   handleDirection(e){
@@ -91,22 +118,25 @@ export default class ScrollContainer extends React.Component {
 
   createScrollSystem(accumulator, node) {
     console.log('createScrollSystem')
-    const {scrollItems} = this
+    const {scrollItems} = this.config
     if(node){
       let children = node.children
-      for(let i=0; i<children.length; i++){
+      for(let i=children.length-1; i>=0; i--){
         let height = children[i].getBoundingClientRect().height
-        accumulator=accumulator+height+Math.ceil(window.innerHeight*.5 - (i*-40) )
+        accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-50) )
         let scrollItem = {
             height: Math.ceil(height)
           , scrollHeight: Math.ceil(accumulator)
-          , spaceFromTop: Math.ceil(window.innerHeight*.5 - (i*-40) )
+          , spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-50) )
         }
-        scrollItems.push(scrollItem)
+        this.config.scrollItems.push(scrollItem)
         children[i].style.paddingTop=`${scrollItem.spaceFromTop}px`
-        children[2].style.position='relative'
+        children[i].style.zIndex=-i+10
+        children[i].style.transform=`translate3d(${i*8}%,${0}%,${0})`
       }
       node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight)}px`
+      this.config.container=node
+      this.config.children=children
     }
   }
 

@@ -6,7 +6,7 @@ import Styled from 'styled-components'
 import Header from '../components/header.js'
 
 const Container = Styled.div`
-  background-color: lightgray;
+
 `
 
 import 'normalize.css';

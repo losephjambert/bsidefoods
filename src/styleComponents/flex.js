@@ -5,6 +5,7 @@ const FlexColumn = Styled.div`
   flex-flow: column wrap;
   justify-content: ${props => props.justify};
   align-items: ${props => props.align};
+  transition: 300ms linear;
 `
 
 export default {FlexColumn}
