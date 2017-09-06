@@ -6,7 +6,8 @@ export default class ScrollContainer extends React.Component {
     currentPanel: null ,
     currentIndex: 0    ,
     direction: null    ,
-    scrollItems: null
+    scrollItems: null  ,
+    releasedPanels: [0]
   }
 
   config={
@@ -33,44 +34,52 @@ export default class ScrollContainer extends React.Component {
   }
 
   handlePanes = (e) =>{
-    const {direction, currentIndex, container, children, scrollItems}=this.config
-    const scrollDistance=window.scrollY
-    let currentPanel = scrollItems[currentIndex].spaceFromTop + scrollItems[currentIndex].height
+    const {
+      container,
+      children
+    }=this.config
+    const {
+      currentPanel,
+      currentIndex,
+      direction,
+      scrollItems,
+      releasedPanels
+    }=this.state
+    // let currentPanel = scrollItems[currentIndex].spaceFromTop + scrollItems[currentIndex].height
+    let length = children.length-1
 
-    children[0].style.position='relative'
-    container.style.backgroundColor='dodgerblue'
-
-    if(window.scrollY <= 0){
-      container.style.backgroundColor='ghostwhite'
+    //handle panel behavior while user scrolls DOWN the page
+    if(direction==='down'){
+      let scrollIndex=0
+        scrollIndex=currentIndex
+        if(
+        scrollIndex < length &&
+        scrollItems[scrollIndex] === currentPanel &&
+        children[scrollIndex].getBoundingClientRect().bottom <= 0 ){
+          scrollIndex+=1
+          this.setState(prevState => ({
+            currentIndex:scrollIndex,
+            currentPanel:prevState.scrollItems[scrollIndex],
+            releasedPanels: [...prevState.releasedPanels, scrollIndex]
+          }))
+        }
     }
-
-    if(children[0].getBoundingClientRect().top){
-        this.config.currentIndex=0
-        container.style.backgroundColor='dodgerblue'
-      }
-    if(children[0].getBoundingClientRect().bottom <= 0){
-      children[1].style.position='relative'
-      container.style.backgroundColor='goldenrod'
-      this.config.currentIndex=1
-      if(children[1].getBoundingClientRect().bottom <= 0){
-        children[2].style.position='relative'
-        container.style.backgroundColor='pink'
-        this.config.currentIndex=2
-      }
+    //handle panel behavior while user scrolls UP the page
+    if(direction==='up'){
+      let scrollIndex=currentIndex
+        if(
+          scrollIndex > 0 &&
+          currentIndex > 0 &&
+          scrollItems[scrollIndex] === currentPanel &&
+          children[scrollIndex - 1].getBoundingClientRect().bottom >= 0 ){
+            scrollIndex-=1
+            this.setState(prevState => ({
+              currentIndex:scrollIndex,
+              currentPanel:prevState.scrollItems[scrollIndex],
+              releasedPanels: prevState.releasedPanels.filter((_, i) => i !== prevState.currentIndex)
+            }))
+        }
     }
-    if(children[2].getBoundingClientRect().top >= 0 && direction==='up'){
-      children[2].style.position='fixed'
-      if(children[1].getBoundingClientRect().top >= 0){
-        children[1].style.position='fixed'
-      }  
-    }
-    if(children[2].getBoundingClientRect().bottom <=0){
-      this.config.show=!this.config.show
-      container.style.backgroundColor='ghostwhite'
-    } else{
-      this.config.show=!this.config.show
-    }
-
   }
 
   handleDirection = (e) =>{
@@ -78,8 +87,8 @@ export default class ScrollContainer extends React.Component {
     const {lastScrollTop}=this.config
 
     scrollDistance > lastScrollTop
-      ? this.config.direction='down'
-      :  this.config.direction='up'
+      ? this.setState(prevState => ({direction:'down'}))
+      : this.setState(prevState => ({direction:'up'}))
 
     this.config.lastScrollTop=scrollDistance
   }
@@ -122,7 +131,8 @@ export default class ScrollContainer extends React.Component {
                 style: {
                   marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
                   top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,
-                  zIndex: -index+10
+                  zIndex: -index+10,
+                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed'
                 }
             })
         )}
