@@ -11,10 +11,10 @@ const Container = Styled.div`
 
 import 'normalize.css';
 
-const TemplateWrapper = ({ children }) =>
+const TemplateWrapper = ({ children, data }) =>
   <Container>
     <Helmet
-      title="B-side Foods | Seattle"
+      title={data.site.siteMetadata.title}
       meta={[
         { name: 'description', content: 'b-side foods. an every day breakfast and lunch place on capitol hill in seattle, washington' },
         { name: 'keywords', content: 'breakfast, lunch, eggs, food, seattle, capitol hill, bowls, snacks, coffee, neighborhood, sandwich, brunch' },
@@ -35,3 +35,13 @@ TemplateWrapper.propTypes = {
 }
 
 export default TemplateWrapper
+
+export const query = graphql`
+  query LayoutQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`

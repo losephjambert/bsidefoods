@@ -1,14 +1,11 @@
 import React from 'react'
-import MenuSection from '../styleComponents/menuSection.js'
+import Styled from 'styled-components'
 
-export default class ScrollItem extends React.Component {
+const Container = Styled.div`
+  
+`
 
-  render() {
-    return (
-      <MenuSection>
-        {this.props.children}
-      </MenuSection>
-    )
-  }
+const ScrollItem = (props) =>
+  <Container />
 
-}
+export default ScrollItem

@@ -1,8 +1,19 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import ScrollContainer from '../components/scrollContainer'
+import ScrollItem from '../components/scrollItem'
+import FoodItem from '../components/foodItem'
+import DrinkItem from '../components/drinkItem'
+import BusinessInformation from '../components/businessInformation'
 
 class IndexPage extends React.Component{
+
+  constructor(props){
+    super(props)
+    this.state={
+      currentIndex: 0
+    }
+  }
   
   render(){
 
@@ -11,7 +22,12 @@ class IndexPage extends React.Component{
     const businessInformation = this.props.data.allContentfulBusinessInformation.edges
 
     return(
-      <ScrollContainer foods={foods} drinks={drinks} businessInformation={businessInformation}/>
+      <ScrollContainer>
+        { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
+        { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
+        { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
+      </ScrollContainer>
+
     )
   }
 

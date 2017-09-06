@@ -1,14 +1,16 @@
 import React from 'react'
-import {FlexColumn} from '../styleComponents/flex'
-import FoodItem from './foodItem'
-import DrinkItem from './drinkItem'
-import BusinessInformation from './businessInformation'
-import MenuSection from '../styleComponents/menuSection'
 
 export default class ScrollContainer extends React.Component {
 
   constructor(props){
     super(props)
+
+    this.state={
+      currentPanel: null ,
+      currentIndex: 0    ,
+      direction: null    ,
+      scrollItems: null
+    }
 
     this.config={
       lastScrollTop:0,
@@ -26,44 +28,26 @@ export default class ScrollContainer extends React.Component {
     this.handlePanes = this.handlePanes.bind(this)
   }
 
+  shouldComponentUpdate(){return false}
+
   componentDidMount(){
     window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
-
     this.config.currentIndex=0
+    this.setState({
+      currentPanel: this.config.scrollItems[0],
+      scrollItems: this.config.scrollItems
+    })
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', (e)=>this.handleScroll(e))
   }
 
-  render() {
-
-    const {foods,drinks,businessInformation}=this.props
-
-    return (
-      <FlexColumn
-        innerRef={(node)=>this.createScrollSystem(0,node)}
-        justify={'flex-start'}
-        align={'center'}>
-          <MenuSection>
-            { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
-          </MenuSection>
-          <MenuSection>
-            { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
-          </MenuSection>
-          <MenuSection>
-            { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
-          </MenuSection>
-      </FlexColumn>
-    )
-
-  }
-
   handlePanes(){
     const {direction, currentIndex, container, children, scrollItems}=this.config
     const scrollDistance=window.scrollY
     let currentPanel = scrollItems[currentIndex].spaceFromTop + scrollItems[currentIndex].height
-    console.log(children[0].style)
+
     children[0].style.position='relative'
     container.style.backgroundColor='dodgerblue'
 
@@ -117,9 +101,9 @@ export default class ScrollContainer extends React.Component {
   }
 
   createScrollSystem(accumulator, node) {
-    console.log('createScrollSystem')
     const {scrollItems} = this.config
     if(node){
+      console.log('createScrollSystem')
       let children = node.children
       for(let i=children.length-1; i>=0; i--){
         let height = children[i].getBoundingClientRect().height
@@ -130,14 +114,27 @@ export default class ScrollContainer extends React.Component {
           , spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-50) )
         }
         this.config.scrollItems.push(scrollItem)
-        children[i].style.paddingTop=`${scrollItem.spaceFromTop}px`
+        children[i].style.marginBottom=`${scrollItem.spaceFromTop}px`
+        children[i].style.top=`${scrollItem.spaceFromTop}px`
         children[i].style.zIndex=-i+10
-        children[i].style.transform=`translate3d(${i*8}%,${0}%,${0})`
       }
-      node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight)}px`
+
       this.config.container=node
       this.config.children=children
+      node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight)}px`
     }
   }
 
+  render() {
+    return (
+      <div ref={(node)=>this.createScrollSystem(0,node)}>
+        {React.Children.map(this.props.children, (children, index) =>
+            React.cloneElement(children, {
+                key: index                                ,
+                active: this.state.currentIndex === index ,
+            })
+        )}
+      </div>
+    )
+  }
 }
