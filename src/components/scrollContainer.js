@@ -50,11 +50,11 @@ export default class ScrollContainer extends React.Component {
       }
     if(children[0].getBoundingClientRect().bottom <= 0){
       children[1].style.position='relative'
-      container.style.backgroundColor='lightpink'
+      container.style.backgroundColor='goldenrod'
       this.config.currentIndex=1
       if(children[1].getBoundingClientRect().bottom <= 0){
         children[2].style.position='relative'
-        container.style.backgroundColor='palegoldenrod'
+        container.style.backgroundColor='pink'
         this.config.currentIndex=2
       }
     }
@@ -103,14 +103,12 @@ export default class ScrollContainer extends React.Component {
           , spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-50) )
         }
         scrollItems.push(scrollItem)
-        children[i].style.marginBottom=`${scrollItem.spaceFromTop}px`
-        children[i].style.top=`${scrollItem.spaceFromTop}px`
-        children[i].style.zIndex=-i+10
       }
 
       this.config.container=node
       this.config.children=children
       node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight)}px`
+      this.config.scrollItems.reverse()
     }
   }
 
@@ -122,8 +120,8 @@ export default class ScrollContainer extends React.Component {
                 key: index                                ,
                 active: this.state.currentIndex === index ,
                 style: {
-                  marginBottom: `${this.state.scrollItems && this.state.scrollItems[this.state.currentIndex].spaceFromTop}px` ,
-                  top: `${this.state.scrollItems && this.state.scrollItems[this.state.currentIndex].spaceFromTop}px`          ,
+                  marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
+                  top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,
                   zIndex: -index+10
                 }
             })

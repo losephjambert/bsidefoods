@@ -1,24 +1,18 @@
 import React from 'react'
 import Styled from 'styled-components'
-import MenuSection from '../styleComponents/menuSection'
 
-const Container = Styled.ul`
-  list-style-type: none;
-  margin: 0;
-  padding: 10px;
-  background-color: dodgerblue;
-  border: 5px solid ghostwhite;
-  color: ghostwhite;
-  min-height: inherit;
-`
-function BusinessInformation ({active, data}) {
+import Menu from '../styleComponents/menu'
+
+function BusinessInformation ({style, active, data}) {
   return(
-    <MenuSection active={active}>
-      <Container active={active}>
-        <li>{data.headline}</li>
-        { data.hours.map(( hour, i) => <li key={i}>{ hour }</li> ) }
-      </Container>
-    </MenuSection>
+    <Menu
+      style={style}
+      active={active}
+      backgroundColor={'dodgerblue'}
+    >
+      <li>{data.headline}</li>
+      { data.hours.map(( hour, i) => <li key={i}>{ hour }</li> ) }
+    </Menu>
   )
 }
 

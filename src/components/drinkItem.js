@@ -1,21 +1,11 @@
 import React from 'react'
 import Styled from 'styled-components'
-import MenuSection from '../styleComponents/menuSection'
 
-const Container = Styled.ul`
-  list-style-type: none;
-  margin: 0;
-  padding: 10px;
-  background-color: palegoldenrod;
-  border: 5px solid ghostwhite;
-  color: ghostwhite;
-  min-height: inherit;
-`
+import Menu from '../styleComponents/menu'
 
-function DrinkItem ({active, data}) {
+function DrinkItem ({style, active, data}) {
   return(
-  <MenuSection active={active}>
-    <Container active={active}>
+    <Menu style={style} active={active} backgroundColor={'pink'}>
       <li>{data.name}</li>
       { data.labels.map(( label, i) => 
         label.toUpperCase() !== 'NO'
@@ -23,8 +13,7 @@ function DrinkItem ({active, data}) {
         : null
       )}
       <li> { data.prices.map(( price, i) => <span key={i}>{ price }</span> ) } </li>
-    </Container>
-  </MenuSection>
+    </Menu>
   )
 }
 
