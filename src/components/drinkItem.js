@@ -12,7 +12,8 @@ const Container = Styled.ul`
   min-height: inherit;
 `
 
-const DrinkItem = ({active, data}) =>
+function DrinkItem ({active, data}) {
+  return(
   <MenuSection active={active}>
     <Container active={active}>
       <li>{data.name}</li>
@@ -24,5 +25,7 @@ const DrinkItem = ({active, data}) =>
       <li> { data.prices.map(( price, i) => <span key={i}>{ price }</span> ) } </li>
     </Container>
   </MenuSection>
+  )
+}
 
 export default DrinkItem

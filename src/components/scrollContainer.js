@@ -2,48 +2,37 @@ import React from 'react'
 
 export default class ScrollContainer extends React.Component {
 
-  constructor(props){
-    super(props)
-
-    this.state={
-      currentPanel: null ,
-      currentIndex: 0    ,
-      direction: null    ,
-      scrollItems: null
-    }
-
-    this.config={
-      lastScrollTop:0,
-      direction: null,
-      currentIndex: null,
-      container: null,
-      children: null,
-      scrollItems:[],
-      show: false
-    }
-
-    this.handleScroll = this.handleScroll.bind(this)
-    this.handleDirection = this.handleDirection.bind(this)
-    this.createScrollSystem = this.createScrollSystem.bind(this)
-    this.handlePanes = this.handlePanes.bind(this)
+  state={
+    currentPanel: null ,
+    currentIndex: 0    ,
+    direction: null    ,
+    scrollItems: null
   }
 
-  shouldComponentUpdate(){return false}
+  config={
+    lastScrollTop:0,
+    direction: null,
+    currentIndex: null,
+    container: null,
+    children: null,
+    scrollItems:[],
+    show: false
+  }
 
   componentDidMount(){
     window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
     this.config.currentIndex=0
-    this.setState({
+    this.setState(prevState => ({
       currentPanel: this.config.scrollItems[0],
       scrollItems: this.config.scrollItems
-    })
+    }))
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', (e)=>this.handleScroll(e))
   }
 
-  handlePanes(){
+  handlePanes = (e) =>{
     const {direction, currentIndex, container, children, scrollItems}=this.config
     const scrollDistance=window.scrollY
     let currentPanel = scrollItems[currentIndex].spaceFromTop + scrollItems[currentIndex].height
@@ -84,7 +73,7 @@ export default class ScrollContainer extends React.Component {
 
   }
 
-  handleDirection(e){
+  handleDirection = (e) =>{
     const scrollDistance=window.scrollY
     const {lastScrollTop}=this.config
 
@@ -100,10 +89,10 @@ export default class ScrollContainer extends React.Component {
     requestAnimationFrame((e)=>this.handlePanes(e))
   }
 
-  createScrollSystem(accumulator, node) {
+  createScrollSystem = (accumulator, node) => {
+    this.config.scrollItems=[]
     const {scrollItems} = this.config
     if(node){
-      console.log('createScrollSystem')
       let children = node.children
       for(let i=children.length-1; i>=0; i--){
         let height = children[i].getBoundingClientRect().height
@@ -113,7 +102,7 @@ export default class ScrollContainer extends React.Component {
           , scrollHeight: Math.ceil(accumulator)
           , spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-50) )
         }
-        this.config.scrollItems.push(scrollItem)
+        scrollItems.push(scrollItem)
         children[i].style.marginBottom=`${scrollItem.spaceFromTop}px`
         children[i].style.top=`${scrollItem.spaceFromTop}px`
         children[i].style.zIndex=-i+10
@@ -132,6 +121,11 @@ export default class ScrollContainer extends React.Component {
             React.cloneElement(children, {
                 key: index                                ,
                 active: this.state.currentIndex === index ,
+                style: {
+                  marginBottom: `${this.state.scrollItems && this.state.scrollItems[this.state.currentIndex].spaceFromTop}px` ,
+                  top: `${this.state.scrollItems && this.state.scrollItems[this.state.currentIndex].spaceFromTop}px`          ,
+                  zIndex: -index+10
+                }
             })
         )}
       </div>

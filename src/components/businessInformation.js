@@ -11,12 +11,15 @@ const Container = Styled.ul`
   color: ghostwhite;
   min-height: inherit;
 `
-const BusinessInformation = ({active, data}) =>
-  <MenuSection active={active}>
-    <Container active={active}>
-      <li>{data.headline}</li>
-      { data.hours.map(( hour, i) => <li key={i}>{ hour }</li> ) }
-    </Container>
-  </MenuSection>
+function BusinessInformation ({active, data}) {
+  return(
+    <MenuSection active={active}>
+      <Container active={active}>
+        <li>{data.headline}</li>
+        { data.hours.map(( hour, i) => <li key={i}>{ hour }</li> ) }
+      </Container>
+    </MenuSection>
+  )
+}
 
 export default BusinessInformation

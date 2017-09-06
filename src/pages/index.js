@@ -1,35 +1,23 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import ScrollContainer from '../components/scrollContainer'
-import ScrollItem from '../components/scrollItem'
 import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
 
-class IndexPage extends React.Component{
+function IndexPage({data}){
 
-  constructor(props){
-    super(props)
-    this.state={
-      currentIndex: 0
-    }
-  }
-  
-  render(){
+  const foods = data.allContentfulFood.edges
+  const drinks = data.allContentfulDrink.edges
+  const businessInformation = data.allContentfulBusinessInformation.edges
 
-    const foods = this.props.data.allContentfulFood.edges
-    const drinks = this.props.data.allContentfulDrink.edges
-    const businessInformation = this.props.data.allContentfulBusinessInformation.edges
-
-    return(
-      <ScrollContainer>
-        { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
-        { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
-        { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
-      </ScrollContainer>
-
-    )
-  }
+  return(
+    <ScrollContainer>
+      { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
+      { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
+      { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
+    </ScrollContainer>
+  )
 
 }
 
