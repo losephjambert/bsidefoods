@@ -13,6 +13,7 @@ const Menu = Styled.ul`
   min-height: 600px;
   transition: 300ms ease-in-out;
   box-shadow: ${props => props.active ? '0 0 5px 0 black' : '0 0 0 0 black'};
+  &:hover{cursor:pointer;}
 `
 
 export default Menu

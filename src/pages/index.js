@@ -6,26 +6,52 @@ import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
 import AppTheme from '../styleComponents/appTheme'
+import Menu from '../styleComponents/menu'
+import Content from './content'
 
-function IndexPage({data}){
+export default class IndexPage extends React.Component {
 
-  const foods = data.allContentfulFood.edges
-  const drinks = data.allContentfulDrink.edges
-  const businessInformation = data.allContentfulBusinessInformation.edges
+  state={
+    clickedIndex:0 ,
+    data: []
+  }
 
-  return(
-    <ThemeProvider theme={AppTheme}>
-      <ScrollContainer>
-        { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
-        { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
-        { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
-      </ScrollContainer>
-    </ThemeProvider>
-  )
+  componentDidMount(){
+    this.normalizeData()
+  }
 
+  handleClick = (e,index) => {
+    console.log('clicked',index)
+    this.setState(prevState=>({clickedIndex:index}))
+  }
+
+  normalizeData = (nodes) => {
+    const foods = this.props.data.allContentfulFood.edges
+    const drinks = this.props.data.allContentfulDrink.edges
+    const biz = this.props.data.allContentfulBusinessInformation.edges
+    let b = (biz.map(( {node}, i) => <BusinessInformation key={i} data={node} /> ))
+    let f = (foods.map(( {node}, i) => <FoodItem key={i} data={node} /> ))
+    let d = (drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
+    let arr=[b,f,d]
+    this.setState(prevSate=>({ data:arr }))
+  }
+
+  render(){
+    if(Object.keys(this.state.data).length > 0){
+
+      const {data}=this.state
+      return(
+        <ThemeProvider theme={AppTheme}>
+          <ScrollContainer handleClick={this.handleClick}>
+            {data.map((a)=>a)}
+          </ScrollContainer>
+        </ThemeProvider>
+      )
+    }
+
+    else{return null}
+  }
 }
-
-export default IndexPage
 
 export const getContent = graphql`
   query GetContent {

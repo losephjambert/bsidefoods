@@ -20,6 +20,8 @@ export default class ScrollContainer extends React.Component {
     show: false
   }
 
+  // shouldComponentUpdate(){return false}
+
   componentDidMount(){
     window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
     this.config.currentIndex=0
@@ -123,12 +125,16 @@ export default class ScrollContainer extends React.Component {
 
   render() {
     console.log('ScrollContainer')
+    const {handleClick}=this.props
+
     return (
       <div ref={(node)=>this.createScrollSystem(0,node)}>
         {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {
                 key: index                                ,
                 active: this.state.currentIndex === index ,
+                activate: handleClick ,
+                index: index ,
                 style: {
                   marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
                   top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,

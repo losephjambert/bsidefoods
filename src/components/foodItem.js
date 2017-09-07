@@ -3,9 +3,14 @@ import Styled from 'styled-components'
 
 import Menu from '../styleComponents/menu'
 
-function FoodItem ({style, active, data}) {
+function FoodItem ({style, active, data, activate, index}) {
   return(
-    <Menu style={style} active={active} backgroundColor={'goldenrod'}>
+    <Menu
+      style={style}
+      active={active}
+      backgroundColor={'goldenrod'}
+      onClick={(e)=>activate(e,index)}
+    >
       <li>{data.name}</li>
       { data.ingredients.map(( ingredient, i) => <li key={i}>{ ingredient }</li> ) }
       { data.labels.map(( label, i) => 

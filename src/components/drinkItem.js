@@ -3,9 +3,14 @@ import Styled from 'styled-components'
 
 import Menu from '../styleComponents/menu'
 
-function DrinkItem ({style, active, data}) {
+function DrinkItem ({style, active, data, activate, index}) {
   return(
-    <Menu style={style} active={active} backgroundColor={'pink'}>
+    <Menu
+      style={style}
+      active={active}
+      backgroundColor={'pink'}
+      onClick={(e)=>activate(e,index)}
+    >
       <li>{data.name}</li>
       { data.labels.map(( label, i) => 
         label.toUpperCase() !== 'NO'
