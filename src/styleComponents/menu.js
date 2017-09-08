@@ -1,6 +1,7 @@
 import Styled from 'styled-components'
 
 const Menu = Styled.ul`
+  box-sizing: border-box;
   list-style-type: none;
   margin: 0;
   padding: 10px;
@@ -8,13 +9,15 @@ const Menu = Styled.ul`
   border: 5px solid ghostwhite;
   color: ghostwhite;
   min-height: inherit;
-  width: 100%;
-  max-width: 750px;
   min-height: 600px;
-  transition: 300ms ease-in-out;
   box-shadow: ${props => props.active ? '0 0 5px 0 black' : '0 0 0 0 black'};
+  width: 100%;
   &:hover{cursor:pointer;}
-  font-family: ${props => props.headline ? 'Cornerstone' : 'Century'}
+  font-family: ${props => props.headline ? 'Cornerstone' : 'Century'};
+  ul{
+    width: 50%;
+    margin: auto;
+    background-color:mediumseagreen;}
 `
 
 export default Menu

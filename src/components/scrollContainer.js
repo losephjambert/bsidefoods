@@ -1,4 +1,10 @@
 import React from 'react'
+import Styled from 'styled-components'
+
+const Container = Styled.div`
+
+
+`
 
 export default class ScrollContainer extends React.Component {
 
@@ -47,7 +53,7 @@ export default class ScrollContainer extends React.Component {
       scrollItems,
       releasedPanels
     }=this.state
-    // let currentPanel = scrollItems[currentIndex].spaceFromTop + scrollItems[currentIndex].height
+
     let length = children.length-1
 
     //handle panel behavior while user scrolls DOWN the page
@@ -118,7 +124,7 @@ export default class ScrollContainer extends React.Component {
 
       this.config.container=node
       this.config.children=children
-      node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight)}px`
+      node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight/2)}px`
       this.config.scrollItems.reverse()
     }
   }
@@ -127,7 +133,7 @@ export default class ScrollContainer extends React.Component {
     const {handleClick}=this.props
 
     return (
-      <div ref={(node)=>this.createScrollSystem(0,node)}>
+      <Container innerRef={(node)=>this.createScrollSystem(0,node)}>
         {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {
                 key: index                                ,
@@ -137,12 +143,12 @@ export default class ScrollContainer extends React.Component {
                 style: {
                   marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
                   top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,
-                  zIndex: -index+10,
-                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed'
+                  zIndex: -index+10 ,
+                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed' ,
                 }
             })
         )}
-      </div>
+      </Container>
     )
   }
 }
