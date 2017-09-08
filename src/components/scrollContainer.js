@@ -122,6 +122,7 @@ export default class ScrollContainer extends React.Component {
   }
 
   render() {
+    console.log('ScrollContainer')
     return (
       <div ref={(node)=>this.createScrollSystem(0,node)}>
         {React.Children.map(this.props.children, (children, index) =>
