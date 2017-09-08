@@ -124,7 +124,6 @@ export default class ScrollContainer extends React.Component {
   }
 
   render() {
-    console.log('ScrollContainer')
     const {handleClick}=this.props
 
     return (
