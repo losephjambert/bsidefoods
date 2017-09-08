@@ -14,6 +14,7 @@ const Menu = Styled.ul`
   transition: 300ms ease-in-out;
   box-shadow: ${props => props.active ? '0 0 5px 0 black' : '0 0 0 0 black'};
   &:hover{cursor:pointer;}
+  font-family: ${props => props.headline ? 'Cornerstone' : 'Century'}
 `
 
 export default Menu

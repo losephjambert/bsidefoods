@@ -1,5 +1,5 @@
 import React from 'react'
-import {styled, ThemeProvider} from 'styled-components'
+import {styled, injectGlobal} from 'styled-components'
 
 import ScrollContainer from '../components/scrollContainer'
 import FoodItem from '../components/foodItem'
@@ -8,6 +8,19 @@ import BusinessInformation from '../components/businessInformation'
 import AppTheme from '../styleComponents/appTheme'
 import Menu from '../styleComponents/menu'
 import Content from './content'
+import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
+import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
+
+injectGlobal`
+  @font-face {
+    font-family: 'Century';
+    src: url(${CenturyItalic});
+  }
+  @font-face {
+    font-family: 'Cornerstone';
+    src: url(${Cornerstone});
+  }
+`
 
 export default class IndexPage extends React.Component {
 
@@ -41,11 +54,9 @@ export default class IndexPage extends React.Component {
 
       const {data}=this.state
       return(
-        <ThemeProvider theme={AppTheme}>
-          <ScrollContainer handleClick={this.handleClick}>
-            {data.map((a)=>a)}
-          </ScrollContainer>
-        </ThemeProvider>
+        <ScrollContainer handleClick={this.handleClick}>
+          {data.map((a)=>a)}
+        </ScrollContainer>
       )
     }
 
