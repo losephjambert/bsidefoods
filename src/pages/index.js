@@ -1,9 +1,11 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import {styled, ThemeProvider} from 'styled-components'
+
 import ScrollContainer from '../components/scrollContainer'
 import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
+import AppTheme from '../styleComponents/appTheme'
 
 function IndexPage({data}){
 
@@ -12,11 +14,13 @@ function IndexPage({data}){
   const businessInformation = data.allContentfulBusinessInformation.edges
 
   return(
-    <ScrollContainer>
-      { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
-      { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
-      { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
-    </ScrollContainer>
+    <ThemeProvider theme={AppTheme}>
+      <ScrollContainer>
+        { businessInformation.map(( {node}, i) => <BusinessInformation key={i} data={node} /> )}
+        { foods.map(( {node}, i) => <FoodItem key={i} data={node} /> )}
+        { drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> )}
+      </ScrollContainer>
+    </ThemeProvider>
   )
 
 }
