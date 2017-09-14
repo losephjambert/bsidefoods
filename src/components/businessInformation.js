@@ -1,21 +1,24 @@
 import React from 'react'
 import Styled from 'styled-components'
 
-import Menu from '../styleComponents/menu'
-import AppTheme from '../styleComponents/appTheme'
+import Hours from '../styleComponents/hours.js'
+
+const Headline = Styled.li`
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  line-height: 1;
+`
 
 function BusinessInformation ({style, active, data, activate, index}) {
   return(
-    <Menu
+    <Hours
       headline
-      style={style}
-      active={active}
-      backgroundColor={'dodgerblue'}
-      onClick={(e)=>activate(e,index)}
+      backgroundColor={'hsla(193, 81%, 73%, 1)'}
     >
-      <li>{data.headline}</li>
+      <Headline>{data.headline}</Headline>
       { data.hours.map(( hour, i) => <li key={i}>{ hour }</li> ) }
-    </Menu>
+    </Hours>
   )
 }
 

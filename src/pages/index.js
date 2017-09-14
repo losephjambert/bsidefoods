@@ -1,13 +1,12 @@
 import React from 'react'
-import {styled, injectGlobal} from 'styled-components'
+import {Styled, injectGlobal} from 'styled-components'
 
 import ScrollContainer from '../components/scrollContainer'
+import ScrollItem from '../components/scrollItem'
 import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
-import AppTheme from '../styleComponents/appTheme'
-import Menu from '../styleComponents/menu'
-import Content from './content'
+
 import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
 
@@ -20,6 +19,10 @@ injectGlobal`
     font-family: 'Cornerstone';
     src: url(${Cornerstone});
   }
+  *{ box-sizing: border-box; }
+  html{ font-size: 18px; }
+  body{ background-color: hsla(50, 100%, 99%, 1)}
+  ul{ list-style-type: none; }
 `
 
 export default class IndexPage extends React.Component {
@@ -30,7 +33,7 @@ export default class IndexPage extends React.Component {
   }
 
   componentDidMount(){
-    this.normalizeData()
+    this.handleData()
   }
 
   handleClick = (e,index) => {
@@ -38,29 +41,34 @@ export default class IndexPage extends React.Component {
     this.setState(prevState=>({clickedIndex:index}))
   }
 
-  normalizeData = (nodes) => {
-    const foods = this.props.data.allContentfulFood.edges
-    const drinks = this.props.data.allContentfulDrink.edges
-    const biz = this.props.data.allContentfulBusinessInformation.edges
-    let b = (biz.map(( {node}, i) => <BusinessInformation key={i} data={node} /> ))
-    let f = (foods.map(( {node}, i) => <FoodItem key={i} data={node} /> ))
-    let d = (drinks.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
-    let arr=[b,f,d]
-    this.setState(prevSate=>({ data:arr }))
+  handleData = (nodes) => {
+    const FOODS = this.props.data.allContentfulFood.edges
+    const DRINKS = this.props.data.allContentfulDrink.edges
+    const BUSINESS_INFORMATION = this.props.data.allContentfulBusinessInformation.edges
+
+    let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={node} /> ))
+    let f = (FOODS.map(( {node}, i) => <FoodItem key={i} data={node} /> ))
+    let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
+    let componentArray=[b,f,d]
+
+    this.setState(prevSate=>({ data:componentArray }))
   }
 
   render(){
     if(Object.keys(this.state.data).length > 0){
 
-      const {data}=this.state
+      const {data,styles}=this.state
+
       return(
         <ScrollContainer handleClick={this.handleClick}>
-          {data.map((a)=>a)}
+          {data.map((datum,index)=>
+            <ScrollItem key={index} datum={datum}/>
+          )}
         </ScrollContainer>
       )
     }
 
-    else{return null}
+    else{ return null }
   }
 }
 

@@ -9,30 +9,28 @@ const Container = Styled.div`
 export default class ScrollContainer extends React.Component {
 
   state={
-    currentPanel: null ,
-    currentIndex: 0    ,
-    direction: null    ,
-    scrollItems: null  ,
+    currentPanel: null    ,
+    currentIndex: 0       ,
+    direction: null       ,
+    scrollItems: null     ,
     releasedPanels: [0]
   }
 
   config={
-    lastScrollTop:0,
-    direction: null,
-    currentIndex: null,
-    container: null,
-    children: null,
-    scrollItems:[],
+    lastScrollTop:0       ,
+    direction: null       ,
+    currentIndex: null    ,
+    container: null       ,
+    children: null        ,
+    scrollItems:[]        ,
     show: false
   }
-
-  // shouldComponentUpdate(){return false}
 
   componentDidMount(){
     window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
     this.config.currentIndex=0
     this.setState(prevState => ({
-      currentPanel: this.config.scrollItems[0],
+      currentPanel: this.config.scrollItems[0] ,
       scrollItems: this.config.scrollItems
     }))
   }
@@ -43,14 +41,14 @@ export default class ScrollContainer extends React.Component {
 
   handlePanes = (e) =>{
     const {
-      container,
+      container ,
       children
     }=this.config
     const {
-      currentPanel,
-      currentIndex,
-      direction,
-      scrollItems,
+      currentPanel    ,
+      currentIndex    ,
+      direction       ,
+      scrollItems     ,
       releasedPanels
     }=this.state
 
@@ -66,8 +64,8 @@ export default class ScrollContainer extends React.Component {
         children[scrollIndex].getBoundingClientRect().bottom <= 0 ){
           scrollIndex+=1
           this.setState(prevState => ({
-            currentIndex:scrollIndex,
-            currentPanel:prevState.scrollItems[scrollIndex],
+            currentIndex:scrollIndex                                      ,
+            currentPanel:prevState.scrollItems[scrollIndex]               ,
             releasedPanels: [...prevState.releasedPanels, scrollIndex]
           }))
         }
@@ -82,8 +80,8 @@ export default class ScrollContainer extends React.Component {
           children[scrollIndex - 1].getBoundingClientRect().bottom >= 0 ){
             scrollIndex-=1
             this.setState(prevState => ({
-              currentIndex:scrollIndex,
-              currentPanel:prevState.scrollItems[scrollIndex],
+              currentIndex:scrollIndex                                                                  ,
+              currentPanel:prevState.scrollItems[scrollIndex]                                           ,
               releasedPanels: prevState.releasedPanels.filter((_, i) => i !== prevState.currentIndex)
             }))
         }
@@ -115,9 +113,9 @@ export default class ScrollContainer extends React.Component {
         let height = children[i].getBoundingClientRect().height
         accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-50) )
         let scrollItem = {
-            height: Math.ceil(height)
-          , scrollHeight: Math.ceil(accumulator)
-          , spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-50) )
+          height: Math.ceil(height)                                        ,
+          scrollHeight: Math.ceil(accumulator)                             ,
+          spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-50) )
         }
         scrollItems.push(scrollItem)
       }
@@ -136,15 +134,15 @@ export default class ScrollContainer extends React.Component {
       <Container innerRef={(node)=>this.createScrollSystem(0,node)}>
         {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {
-                key: index                                ,
-                active: this.state.currentIndex === index ,
-                activate: handleClick ,
-                index: index ,
+                key: index                                 ,
+                active: this.state.currentIndex === index  ,
+                activate: handleClick                      ,
+                index: index                               ,
                 style: {
                   marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
                   top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,
-                  zIndex: -index+10 ,
-                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed' ,
+                  zIndex: -index+10                                                                         ,
+                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed'                ,
                 }
             })
         )}

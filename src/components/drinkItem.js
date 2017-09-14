@@ -1,18 +1,16 @@
 import React from 'react'
 import Styled from 'styled-components'
 
-import Menu from '../styleComponents/menu'
+import Menu from '../styleComponents/menu.js'
 
 function DrinkItem ({style, active, data, activate, index}) {
+
   return(
     <Menu
-      style={style}
-      active={active}
-      backgroundColor={'pink'}
-      onClick={(e)=>activate(e,index)}
+      backgroundColor={'hsla(48, 100%, 86%,1)'}
     >
       <li>{data.name}</li>
-      { data.labels.map(( label, i) => 
+      { data.labels.map(( label, i) =>
         label.toUpperCase() !== 'NO'
         ? <li key={i}>{ label }</li>
         : null

@@ -1,13 +1,14 @@
 import Styled from 'styled-components'
 
-const Menu = Styled.ul`
+const Hours = Styled.ul`
   max-width: 600px;
   margin: 0 auto;
+  height: 600px;
   padding: 25px;
   font-family: ${props => props.headline ? 'Cornerstone' : 'Century'};
   background-color: ${props => props.backgroundColor};
-  color: #1E467E;
+  color: ghostwhite;
   &:hover{cursor:pointer;}
 `
 
-export default Menu
+export default Hours
