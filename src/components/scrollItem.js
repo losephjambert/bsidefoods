@@ -12,14 +12,17 @@ const ScrollItem = (props) =>
   <StyleContainer
     style={props.style}
   >
-    {React.Children.map(props.datum, (children, index) =>
-        React.cloneElement(children, {
-            key: index,
-            active: props.active,
-            activate: props.activate,
-            index: props.index
-        })
-    )}
+    <div style={{maxWidth:'600px',margin:'auto', backgroundColor:props.backgroundColor, fontFamily:'Cornerstone', color:props.color}}>
+      <h2>{props.title}</h2>
+      {React.Children.map(props.data, (children, index) =>
+          React.cloneElement(children, {
+              key: index,
+              active: props.active,
+              activate: props.activate,
+              index: props.index
+          })
+      )}
+    </div>
   </StyleContainer>
 
 export default ScrollItem

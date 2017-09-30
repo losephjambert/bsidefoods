@@ -6,8 +6,7 @@ const Hours = Styled.ul`
   height: 600px;
   padding: 25px;
   font-family: ${props => props.headline ? 'Cornerstone' : 'Century'};
-  background-color: ${props => props.backgroundColor};
-  color: ghostwhite;
+  color: ${props => props.color};
   &:hover{cursor:pointer;}
 `
 

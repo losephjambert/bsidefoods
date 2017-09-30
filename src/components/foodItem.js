@@ -5,7 +5,7 @@ import Menu from '../styleComponents/menu.js'
 
 function FoodItem ({style, active, data, activate, index}) {
   return(
-    <Menu backgroundColor={'hsla(15, 100%, 89%,1)'}>
+    <Menu>
       <li>{data.name}</li>
       { data.ingredients.map(( ingredient, i) => <li key={i}>{ ingredient }</li> ) }
       { data.labels.map(( label, i) =>

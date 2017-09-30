@@ -5,8 +5,6 @@ const Menu = Styled.ul`
   margin: 0 auto;
   padding: 25px;
   font-family: ${props => props.headline ? 'Cornerstone' : 'Century'};
-  background-color: ${props => props.backgroundColor};
-  color: #1E467E;
   &:hover{cursor:pointer;}
 `
 
