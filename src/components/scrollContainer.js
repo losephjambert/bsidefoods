@@ -1,10 +1,4 @@
 import React from 'react'
-import Styled from 'styled-components'
-
-const Container = Styled.div`
-
-
-`
 
 export default class ScrollContainer extends React.Component {
 
@@ -111,11 +105,11 @@ export default class ScrollContainer extends React.Component {
       let children = node.children
       for(let i=children.length-1; i>=0; i--){
         let height = children[i].getBoundingClientRect().height
-        accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-50) )
+        accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-100) )
         let scrollItem = {
           height: Math.ceil(height)                                        ,
           scrollHeight: Math.ceil(accumulator)                             ,
-          spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-50) )
+          spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-100) )
         }
         scrollItems.push(scrollItem)
       }
@@ -131,13 +125,15 @@ export default class ScrollContainer extends React.Component {
     const {handleClick}=this.props
 
     return (
-      <Container innerRef={(node)=>this.createScrollSystem(0,node)}>
+      <div ref={(node)=>this.createScrollSystem(0,node)}>
         {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {
                 key: index                                 ,
                 active: this.state.currentIndex === index  ,
                 activate: handleClick                      ,
                 index: index                               ,
+                left: index*5-5                          ,
+                rotate: index*5                            ,
                 style: {
                   marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
                   top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,
@@ -146,7 +142,7 @@ export default class ScrollContainer extends React.Component {
                 }
             })
         )}
-      </Container>
+      </div>
     )
   }
 }

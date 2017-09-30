@@ -57,12 +57,12 @@ export default class IndexPage extends React.Component {
           color={white}/>
         <ScrollItem
           data={f}
-          title="Foods"
+          title="Tasty Foods"
           backgroundColor={pink}
           color={brandBlue}/>
         <ScrollItem
           data={d}
-          title="Drinks"
+          title="Fine Drinks"
           backgroundColor={yellow}
           color={brandBlue}/>
 
