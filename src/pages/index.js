@@ -1,4 +1,5 @@
 import React from 'react'
+import Scroll from 'react-scroll'
 import {Styled, injectGlobal} from 'styled-components'
 
 import ScrollContainer from '../components/scrollContainer'
@@ -12,6 +13,8 @@ import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
+
+let scroll = Scroll.animateScroll
 
 injectGlobal`
   @font-face {
@@ -31,12 +34,17 @@ injectGlobal`
 export default class IndexPage extends React.Component {
 
   state={
-    clickedIndex:0
+    clickedIndex:0 ,
+    prevScrollDistance: 0
   }
 
-  handleClick = (e,index) => {
+  handleClick = (e,index, distance) => {
     console.log('clicked',index)
-    this.setState(prevState=>({clickedIndex:index}))
+    this.setState(prevState=>({
+      clickedIndex:index ,
+      prevScrollDistance: distance
+    }))
+    scroll.scrollTo(distance + this.state.prevScrollDistance)
   }
 
   render(){

@@ -7,7 +7,8 @@ export default class ScrollContainer extends React.Component {
     currentIndex: 0       ,
     direction: null       ,
     scrollItems: null     ,
-    releasedPanels: [0]
+    releasedPanels: [0]   ,
+    totalHeight: null
   }
 
   config={
@@ -25,8 +26,11 @@ export default class ScrollContainer extends React.Component {
     this.config.currentIndex=0
     this.setState(prevState => ({
       currentPanel: this.config.scrollItems[0] ,
-      scrollItems: this.config.scrollItems
+      scrollItems: this.config.scrollItems,
+      totalHeight: parseInt(this.config.container.style.height)
     }))
+    // console.log( parseInt(this.config.container.style.height) )
+
   }
 
   componentWillUnmount() {
@@ -96,11 +100,14 @@ export default class ScrollContainer extends React.Component {
   handleScroll(e){
     requestAnimationFrame((e)=>this.handleDirection(e))
     requestAnimationFrame((e)=>this.handlePanes(e))
+    console.log(window.scrollY)
   }
 
   createScrollSystem = (accumulator, node) => {
     this.config.scrollItems=[]
     const {scrollItems} = this.config
+    let nodeHeight = null
+
     if(node){
       let children = node.children
       for(let i=children.length-1; i>=0; i--){
@@ -109,14 +116,15 @@ export default class ScrollContainer extends React.Component {
         let scrollItem = {
           height: Math.ceil(height)                                        ,
           scrollHeight: Math.ceil(accumulator)                             ,
-          spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-100) )
+          spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-100) )  
         }
         scrollItems.push(scrollItem)
       }
 
       this.config.container=node
       this.config.children=children
-      node.style.height=`${Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight/2)}px`
+      nodeHeight=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight/2)
+      node.style.height=`${nodeHeight}px`
       this.config.scrollItems.reverse()
     }
   }
@@ -132,8 +140,10 @@ export default class ScrollContainer extends React.Component {
                 active: this.state.currentIndex === index  ,
                 activate: handleClick                      ,
                 index: index                               ,
-                left: index*5-5                          ,
+                left: index*5-5                            ,
                 rotate: index*5                            ,
+                totalHeight: this.state.totalHeight        ,
+                config: this.config.scrollItems[index]     ,
                 style: {
                   marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
                   top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,

@@ -45,6 +45,7 @@ const ScrollItem = (props) =>
     style={props.style}
   >
     <Item
+      onClick={(e)=>props.activate(e, props.index, props.config.height)}
       color={props.color}
       backgroundColor={props.backgroundColor}
       left={props.left}
