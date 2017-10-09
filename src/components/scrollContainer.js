@@ -29,7 +29,6 @@ export default class ScrollContainer extends React.Component {
       scrollItems: this.config.scrollItems,
       totalHeight: parseInt(this.config.container.style.height)
     }))
-    // console.log( parseInt(this.config.container.style.height) )
 
   }
 
@@ -100,7 +99,6 @@ export default class ScrollContainer extends React.Component {
   handleScroll(e){
     requestAnimationFrame((e)=>this.handleDirection(e))
     requestAnimationFrame((e)=>this.handlePanes(e))
-    console.log(window.scrollY)
   }
 
   createScrollSystem = (accumulator, node) => {
@@ -110,14 +108,20 @@ export default class ScrollContainer extends React.Component {
 
     if(node){
       let children = node.children
-      for(let i=children.length-1; i>=0; i--){
-        let height = children[i].getBoundingClientRect().height
+      let prevHeight = 0
+      let prevSpaceFromTop = 0
+      for(let i=0; i<=children.length-1; i++){
+        let height = Math.ceil( children[i].getBoundingClientRect().height )
         accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-100) )
+        let spaceFromTop = Math.ceil(window.innerHeight*.75 - (-i*-100) )
         let scrollItem = {
-          height: Math.ceil(height)                                        ,
-          scrollHeight: Math.ceil(accumulator)                             ,
-          spaceFromTop: Math.ceil(window.innerHeight*.75 - (-i*-100) )  
+          height: height ,
+          spaceFromTop: spaceFromTop ,
+          scrollHeight: accumulator ,
+          prevHeight: prevHeight + spaceFromTop/2
         }
+        prevSpaceFromTop = spaceFromTop
+        prevHeight = height + prevSpaceFromTop + prevHeight
         scrollItems.push(scrollItem)
       }
 
@@ -125,7 +129,6 @@ export default class ScrollContainer extends React.Component {
       this.config.children=children
       nodeHeight=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight/2)
       node.style.height=`${nodeHeight}px`
-      this.config.scrollItems.reverse()
     }
   }
 
@@ -136,19 +139,19 @@ export default class ScrollContainer extends React.Component {
       <div ref={(node)=>this.createScrollSystem(0,node)}>
         {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {
-                key: index                                 ,
-                active: this.state.currentIndex === index  ,
-                activate: handleClick                      ,
-                index: index                               ,
-                left: index*5-5                            ,
-                rotate: index*5                            ,
-                totalHeight: this.state.totalHeight        ,
-                config: this.config.scrollItems[index]     ,
+                key: index ,
+                active: this.state.currentIndex === index ,
+                activate: handleClick ,
+                index: index ,
+                left: index*10 ,
+                rotate: 3 ,
+                totalHeight: this.state.totalHeight ,
+                config: this.config.scrollItems[index] ,
                 style: {
                   marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
-                  top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`          ,
-                  zIndex: -index+10                                                                         ,
-                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed'                ,
+                  top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
+                  zIndex: -index+10 ,
+                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed' ,
                 }
             })
         )}

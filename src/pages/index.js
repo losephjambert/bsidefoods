@@ -15,6 +15,7 @@ import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
 const {yellow, blue, pink, white, brandBlue} = Colors
 
 let scroll = Scroll.animateScroll
+let Link = Scroll.Link
 
 injectGlobal`
   @font-face {
@@ -33,18 +34,8 @@ injectGlobal`
 
 export default class IndexPage extends React.Component {
 
-  state={
-    clickedIndex:0 ,
-    prevScrollDistance: 0
-  }
-
   handleClick = (e,index, distance) => {
-    console.log('clicked',index)
-    this.setState(prevState=>({
-      clickedIndex:index ,
-      prevScrollDistance: distance
-    }))
-    scroll.scrollTo(distance + this.state.prevScrollDistance)
+    scroll.scrollTo(distance)
   }
 
   render(){
@@ -57,24 +48,25 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
-      <ScrollContainer handleClick={this.handleClick}>
-        
-        <ScrollItem
-          data={b}
-          backgroundColor={blue}
-          color={white}/>
-        <ScrollItem
-          data={f}
-          title="Tasty Foods"
-          backgroundColor={pink}
-          color={brandBlue}/>
-        <ScrollItem
-          data={d}
-          title="Fine Drinks"
-          backgroundColor={yellow}
-          color={brandBlue}/>
-
-      </ScrollContainer>
+      <div style={{position: 'relative'}}>
+        <ScrollContainer handleClick={this.handleClick}>
+          <ScrollItem
+            data={b}
+            backgroundColor={blue}
+            color={white}/>
+          <ScrollItem
+            data={f}
+            title="Tasty Foods"
+            backgroundColor={pink}
+            color={brandBlue}/>
+          <ScrollItem
+            data={d}
+            title="Fine Drinks"
+            backgroundColor={yellow}
+            color={brandBlue}/>
+        </ScrollContainer>
+        <div style={{position: 'absolute', top: `${window.innerHeight+window.innerHeight/2}px`, display: 'inline', transform: 'rotate(90deg)' }}> This is a text test for placement of the fun text</div>
+      </div>
     )
   }
 }

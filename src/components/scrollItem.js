@@ -7,10 +7,15 @@ import Media from '../styleComponents/mediaQueries'
 const {yellow, blue, pink, white, brandBlue} = Colors
 
 const StyleContainer = Styled.div`
-  width: 100%;
+  width: 600px;
+  max-width: 100%;
   min-height: 600px;
   margin: 0;
   padding: 0;
+  ${Media.forTabletPortraitUp`
+    left: calc(50% - ${(window.innerWidth/2) - (600/2)}px);
+    right: calc(50% - ${(window.innerWidth/2) - (600/2)}px);
+  `}
 `
 
 const Item = Styled.div`
@@ -24,10 +29,10 @@ const Item = Styled.div`
   box-shadow: inset 0 0 0 15px ${white};
   ${Media.forTabletPortraitUp`
       position: relative;
-      left: ${props=>props.left}%;
-      transform-origin: left;
+      left: ${props=>props.left + props.index*2}%;
+      transform-origin: top left;
       transition: 500ms;
-      transform: ${props=>props.active ? `rotate(0deg)` :`rotate(${props.rotate}deg)` };
+      transform: ${props=>props.active ? `rotate(0deg)` :`rotate(${props.rotate  + props.index*2}deg)` };
   `}
   &:hover{cursor:pointer;}
 `
@@ -43,13 +48,15 @@ const ItemTitle = Styled.h2`
 const ScrollItem = (props) =>
   <StyleContainer
     style={props.style}
+    width={600}
   >
     <Item
-      onClick={(e)=>props.activate(e, props.index, props.config.height)}
+      onClick={(e)=>props.activate(e, props.index, props.config.prevHeight)}
       color={props.color}
       backgroundColor={props.backgroundColor}
       left={props.left}
       rotate={props.rotate}
+      index={props.index}
       active={props.active}>
       <ItemTitle>{props.title}</ItemTitle>
       {React.Children.map(props.data, (children, index) =>
