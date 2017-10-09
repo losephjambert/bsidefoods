@@ -48,7 +48,7 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
-      <div style={{position: 'relative'}}>
+      <div>
         <ScrollContainer handleClick={this.handleClick}>
           <ScrollItem
             data={b}
@@ -65,7 +65,6 @@ export default class IndexPage extends React.Component {
             backgroundColor={yellow}
             color={brandBlue}/>
         </ScrollContainer>
-        <div style={{position: 'absolute', top: `${window.innerHeight+window.innerHeight/2}px`, display: 'inline', transform: 'rotate(90deg)' }}> This is a text test for placement of the fun text</div>
       </div>
     )
   }
