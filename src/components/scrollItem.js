@@ -6,6 +6,8 @@ import Media from '../styleComponents/mediaQueries'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
 
+if (typeof window === 'undefined') { global.window = {} }
+
 const StyleContainer = Styled.div`
   width: 600px;
   max-width: 100%;
