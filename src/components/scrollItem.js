@@ -42,34 +42,47 @@ const Item = Styled.div`
 const ItemTitle = Styled.h2`
   font-size: 2em;
   text-align: center;
+  margin-bottom: 100px;
   ${Media.forTabletPortraitUp`
     font-size: 3em;
   `}
 `
 
-const ScrollItem = (props) =>
-  <StyleContainer
-    style={props.style}
-    width={600}
-  >
-    <Item
-      onClick={(e)=>props.activate(e, props.index, props.config.prevHeight)}
-      color={props.color}
-      backgroundColor={props.backgroundColor}
-      left={props.left}
-      rotate={props.rotate}
-      index={props.index}
-      active={props.active}>
-      <ItemTitle>{props.title}</ItemTitle>
-      {React.Children.map(props.data, (children, index) =>
-          React.cloneElement(children, {
-              key: index,
-              active: props.active,
-              activate: props.activate,
-              index: props.index
-          })
-      )}
-    </Item>
-  </StyleContainer>
+const ScrollItem = ({
+  style,
+  config,
+  index,
+  color,
+  backgroundColor,
+  left,
+  rotate,
+  active,
+  title,
+  activate,
+  data}) =>
+
+    <StyleContainer
+      style={style}
+      width={600}
+    >
+      <Item
+        onClick={(e)=>activate(e, index, config.prevHeight)}
+        color={color}
+        backgroundColor={backgroundColor}
+        left={left}
+        rotate={rotate}
+        index={index}
+        active={active}>
+        <ItemTitle>{title}</ItemTitle>
+        {React.Children.map(data, (children, index) =>
+            React.cloneElement(children, {
+                key: index,
+                active: active,
+                activate: activate,
+                index: index
+            })
+        )}
+      </Item>
+    </StyleContainer>
 
 export default ScrollItem
