@@ -14,6 +14,15 @@ const StyleContainer = Styled.div`
   min-height: 600px;
   margin: 0;
   padding: 0;
+  z-index: ${props=>props.zIndex};
+  margin-bottom: ${props=>props.marginBottom};
+  position: ${props=>props.position ? 'relative' : 'fixed'};
+  top: ${props=>props.top}px;
+
+  // TRYING TO GET A SCROLL THEN STICKY HAPPENING WITH THIS
+  // top: ${props=> props.stick ? `-${props.config.height-200}px` : `${props.top}px`};
+  // position: ${props=>props.stick ? 'fixed' : ''};
+
   ${Media.forTabletPortraitUp`
     left: calc(50% - ${(window.innerWidth/2) - (600/2)}px);
     right: calc(50% - ${(window.innerWidth/2) - (600/2)}px);
@@ -32,9 +41,6 @@ const Item = Styled.div`
   ${Media.forTabletPortraitUp`
       position: relative;
       left: ${props=>props.left + props.index*2}%;
-      transform-origin: top left;
-      transition: 500ms;
-      transform: ${props=>props.active ? `rotate(0deg)` :`rotate(${props.rotate  + props.index*2}deg)` };
   `}
   &:hover{cursor:pointer;}
 `
@@ -59,11 +65,21 @@ const ScrollItem = ({
   active,
   title,
   activate,
+  stick,
+  position,
+  top,
+  zIndex,
+  marginBottom,
   data}) =>
 
     <StyleContainer
-      style={style}
       width={600}
+      stick={stick}
+      position={position}
+      config={config}
+      top={top}
+      zIndex={zIndex}
+      marginBottom={marginBottom}
     >
       <Item
         onClick={(e)=>activate(e, index, config.prevHeight)}

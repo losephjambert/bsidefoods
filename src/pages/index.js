@@ -52,6 +52,7 @@ export default class IndexPage extends React.Component {
         <ScrollContainer handleClick={this.handleClick}>
           <ScrollItem
             data={b}
+            title="B~SIDE FOODS"
             backgroundColor={blue}
             color={white}/>
           <ScrollItem

@@ -110,7 +110,7 @@ export default class ScrollContainer extends React.Component {
       let children = node.children
       let prevHeight = 0
       let prevSpaceFromTop = 0
-      for(let i=0; i<=children.length-1; i++){
+      for(let i=children.length-1; i>=0; i--){
         let height = Math.ceil( children[i].getBoundingClientRect().height )
         accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-100) )
         let spaceFromTop = Math.ceil(window.innerHeight*.75 - (-i*-100) )
@@ -124,10 +124,9 @@ export default class ScrollContainer extends React.Component {
         prevHeight = height + prevSpaceFromTop + prevHeight
         scrollItems.push(scrollItem)
       }
-
       this.config.container=node
       this.config.children=children
-      nodeHeight=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+window.innerHeight/2)
+      nodeHeight=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight)
       node.style.height=`${nodeHeight}px`
     }
   }
@@ -147,12 +146,11 @@ export default class ScrollContainer extends React.Component {
                 rotate: 3 ,
                 totalHeight: this.state.totalHeight ,
                 config: this.config.scrollItems[index] ,
-                style: {
-                  marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
-                  top: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px` ,
-                  zIndex: -index+10 ,
-                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed' ,
-                }
+                stick: this.state.currentIndex !== index && this.state.releasedPanels.includes(index),
+                position: this.state.releasedPanels.includes(index), 
+                top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop ,
+                zIndex: index+10 ,
+                marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`
             })
         )}
       </div>
