@@ -5,25 +5,41 @@ import Hours from '../styleComponents/hours.js'
 import Colors from '../styleVariables/colors'
 import Media from '../styleComponents/mediaQueries'
 
-const { white } = Colors
+import PatioSVG from '../assets/patio.svg'
+
+const { white, pink, blue, yellow } = Colors
 
 const Headline = Styled.li`
-  font-size: 6vmax;
+  font-size: 2em;
   margin-bottom: 2em;
   text-align: center;
   line-height: 1;
   ${Media.forTabletLandscapeUp`
-    font-size: 4vmax;
+    font-size: 3em;
   `}
 `
 const Hour = Styled.li`
-  font-size: 5vmax;
+  font-size: 2em;
   text-align: center;
+  ${Media.forTabletLandscapeUp`
+  font-size: 3em;
+`}
+`
+const Patio = Styled.div`
+  position: fixed;
+  top: 200px;
+  right: 100px;
+  width: 180px;
+  height: 180px;
+  background-image: url(${PatioSVG});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 `
 
 function BusinessInformation ({style, active, data, activate, index}) {
   return(
-    <Hours headline color={white}>
+    <Hours headline color={white} style={{position: 'relative'}}>
       <Headline>{data.headline}</Headline>
       { data.hours.map(( hour, i) => <Hour key={i}>{ hour }</Hour> ) }
     </Hours>

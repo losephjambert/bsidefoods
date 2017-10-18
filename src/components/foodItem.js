@@ -5,6 +5,8 @@ import Colors from '../styleVariables/colors'
 import Menu from '../styleComponents/menu.js'
 import Media from '../styleComponents/mediaQueries'
 
+const {white, pink, yellow, blue} = Colors
+
 const Wrap = Menu.extend`
   display: flex;
   flex-flow: row wrap;
@@ -12,6 +14,7 @@ const Wrap = Menu.extend`
 `
 
 const Name = Styled.li`
+  padding-left: 2px;
   text-transform: uppercase;
   letter-spacing: .025em;
   font-weight: bold;
@@ -41,7 +44,7 @@ const Price = Styled.li`
     width: 0.5em;
     height: 100%;
     position: relative;
-    background-color: ${Colors.pink};
+    background-color: ${pink};
   }
   & > span{
     &:nth-of-type(2){
@@ -59,7 +62,8 @@ const Label = Styled.li`
   flex: 1 0 100%;
   text-indent: 10px;
   font-size: 0.6em;
-  text-transform: uppercase;
+  text-transform: lowercase;
+  font-weight: bold;
   margin-top: 5px;
   &::before{
     content: '*';
@@ -73,7 +77,7 @@ width: 100%;
 flex: 1 0 100%;
 text-indent: 10px;
 font-size: 0.6em;
-text-transform: uppercase;
+text-transform: lowercase;
 margin-top: 5px;
 ${Media.forTabletPortraitUp`
   font-size: 0.8em;

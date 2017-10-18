@@ -16,16 +16,21 @@ const StyleContainer = Styled.div`
   padding: 0;
   z-index: ${props=>props.zIndex};
   margin-bottom: ${props=>props.marginBottom};
-  position: ${props=>props.position ? 'relative' : 'fixed'};
+  position: ${props=>props.position};
   top: ${props=>props.top}px;
 
-  // TRYING TO GET A SCROLL THEN STICKY HAPPENING WITH THIS
-  // top: ${props=> props.stick ? `-${props.config.height-200}px` : `${props.top}px`};
-  // position: ${props=>props.stick ? 'fixed' : ''};
-
   ${Media.forTabletPortraitUp`
-    left: calc(50% - ${(window.innerWidth/2) - (600/2)}px);
-    right: calc(50% - ${(window.innerWidth/2) - (600/2)}px);
+    left: calc(50% - 300px);
+    right: calc(50% - 300px);
+  `}
+
+  ${Media.forTabletLandscapeUp`
+    &:nth-child(1){
+      transform: translateX(10%);
+    }
+    &:nth-child(3){
+      transform: translateX(-10%);
+    }
   `}
 `
 
@@ -37,20 +42,35 @@ const Item = Styled.div`
   background-color: ${props => props.backgroundColor};
   font-family:'Cornerstone';
   color:${props => props.color};
-  box-shadow: inset 0 0 0 15px ${white};
   ${Media.forTabletPortraitUp`
       position: relative;
-      left: ${props=>props.left + props.index*2}%;
+      // right: ${props=>props.left}%;
   `}
-  &:hover{cursor:pointer;}
 `
 
 const ItemTitle = Styled.h2`
   font-size: 2em;
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   ${Media.forTabletPortraitUp`
     font-size: 3em;
+  `}
+`
+const FlyOutText = Styled.p`
+  position: absolute;
+  z-index: 100;
+  top: 600px;
+  left: ${props=>props.left ? props.left : ''};
+  right: ${props=>props.right ? props.right : ''};
+  color: ${props=>props.color};
+  transform: rotate(90deg);
+  transform-origin: center;
+  font-size: 3em;
+  letter-spacing: .1em;
+  min-width: 800px;
+  margin: 0;
+  ${Media.forTabletLandscapeUp`
+
   `}
 `
 
@@ -70,6 +90,7 @@ const ScrollItem = ({
   top,
   zIndex,
   marginBottom,
+  phrase,
   data}) =>
 
     <StyleContainer
@@ -89,6 +110,13 @@ const ScrollItem = ({
         rotate={rotate}
         index={index}
         active={active}>
+        <FlyOutText
+          color={phrase.color}
+          left={phrase.left}
+          right={phrase.right}
+          >
+          {phrase.title}
+        </FlyOutText>
         <ItemTitle>{title}</ItemTitle>
         {React.Children.map(data, (children, index) =>
             React.cloneElement(children, {

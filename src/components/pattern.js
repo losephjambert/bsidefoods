@@ -8,6 +8,7 @@ const PatternContainer = Styled.div`
   top: 0;
   left: 0;
   right: 0;
+  z-index: -10;
   background-image: url(${wave});
     background-size: cover;
     background-position: center;

@@ -12,6 +12,7 @@ const Wrap = Menu.extend`
 `
 
 const Name = Styled.li`
+  padding-left: 2px;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: .025em;
@@ -59,7 +60,8 @@ const Label = Styled.li`
   flex: 1 0 100%;
   text-indent: 10px;
   font-size: 0.6em;
-  text-transform: uppercase;
+  text-transform: lowercase;
+  font-weight: bold;
   margin-top: 5px;
   &::before{
     content: '*';

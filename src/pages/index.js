@@ -8,9 +8,12 @@ import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
 import Colors from '../styleVariables/colors'
+import Patio from '../components/patio'
 
 import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
+
+import cursor from '../assets/cursor.png' 
 
 const {yellow, blue, pink, white, brandBlue} = Colors
 
@@ -28,7 +31,10 @@ injectGlobal`
   }
   *{ box-sizing: border-box; }
   html{ font-size: 18px; }
-  body{ background-color: ${white}}
+  body{ 
+    background-color: ${white};
+    cursor: url(${cursor}), auto;
+  }
   ul{ list-style-type: none; }
 `
 
@@ -49,22 +55,37 @@ export default class IndexPage extends React.Component {
 
     return(
       <div>
+        <Patio />
         <ScrollContainer handleClick={this.handleClick}>
           <ScrollItem
             data={b}
-            title="B~SIDE FOODS"
             backgroundColor={blue}
-            color={white}/>
+            color={white}
+            phrase={{
+              title: 'Satisfied Customers',
+              color: pink,
+              left: '-600px'
+            }}/>
           <ScrollItem
             data={f}
-            title="Tasty Foods"
+            title='Tasty Foods'
             backgroundColor={pink}
-            color={brandBlue}/>
+            color={brandBlue}
+            phrase={{
+              title: 'Scrumptious Morsels',
+              color: yellow,
+              right: '-520px'
+            }}/>
           <ScrollItem
             data={d}
-            title="Fine Drinks"
+            title='Fine Drinks'
             backgroundColor={yellow}
-            color={brandBlue}/>
+            color={brandBlue}
+            phrase={{
+              title: 'Boozy Beverages',
+              color: blue,
+              left: '-500px'
+            }}/>
         </ScrollContainer>
       </div>
     )
