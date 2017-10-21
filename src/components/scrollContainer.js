@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Patio from './patio'
+
 export default class ScrollContainer extends React.Component {
 
   state={
@@ -135,24 +137,28 @@ export default class ScrollContainer extends React.Component {
     const {handleClick}=this.props
 
     return (
-      <div ref={(node)=>this.createScrollSystem(0,node)}>
-        {React.Children.map(this.props.children, (children, index) =>
-            React.cloneElement(children, {
-                key: index ,
-                active: this.state.currentIndex === index ,
-                activate: handleClick ,
-                index: index ,
-                left: index*10 ,
-                rotate: 3 ,
-                totalHeight: this.state.totalHeight ,
-                config: this.config.scrollItems[index] ,
-                stick: this.state.currentIndex !== index && this.state.releasedPanels.includes(index),
-                position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed', 
-                top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop ,
-                zIndex: -index+10 ,
-                marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`
-            })
-        )}
+      <div>
+        <Patio 
+          currentPanel={this.state.currentPanel}/>
+        <div ref={(node)=>this.createScrollSystem(0,node)}>
+          {React.Children.map(this.props.children, (children, index) =>
+              React.cloneElement(children, {
+                  key: index ,
+                  active: this.state.currentIndex === index ,
+                  activate: handleClick ,
+                  index: index ,
+                  left: index*10 ,
+                  rotate: 3 ,
+                  totalHeight: this.state.totalHeight ,
+                  config: this.config.scrollItems[index] ,
+                  stick: this.state.currentIndex !== index && this.state.releasedPanels.includes(index),
+                  position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed', 
+                  top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop ,
+                  zIndex: -index+10 ,
+                  marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`
+              })
+          )}
+        </div>
       </div>
     )
   }

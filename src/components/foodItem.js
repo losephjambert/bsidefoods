@@ -51,7 +51,7 @@ const Price = Styled.li`
     }
   }
 `
-const Labels = Styled.li`
+const Labels = Styled.div`
   padding-left: 10px;
 `
 const Label = Styled.li`
@@ -65,7 +65,7 @@ const Label = Styled.li`
     content: '*';
   }
 `
-const Ingredients = Styled.li`
+const Ingredients = Styled.div`
   width: 100%;
   flex:  1 0 100%;
   margin-top: 5px;
@@ -92,7 +92,7 @@ function FoodItem ({style, active, data, activate, index}) {
       </Ingredients>
       { data.labels.map(( label, i) =>
         label.toUpperCase() !== 'NO'
-        ? <Labels> <Label key={i}>{ label }</Label> </Labels>
+        ? <Labels key={i}> <Label>{ label }</Label> </Labels>
         : null
       )}
     </Wrap>

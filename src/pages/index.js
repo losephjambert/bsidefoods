@@ -55,14 +55,13 @@ export default class IndexPage extends React.Component {
 
     return(
       <div>
-        <Patio />
         <ScrollContainer handleClick={this.handleClick}>
           <ScrollItem
             data={b}
             backgroundColor={blue}
             color={white}
             phrase={{
-              title: 'Satisfied Customers',
+              title: '',
               color: pink,
               left: '-600px'
             }}/>
@@ -72,7 +71,7 @@ export default class IndexPage extends React.Component {
             backgroundColor={pink}
             color={brandBlue}
             phrase={{
-              title: 'Scrumptious Morsels',
+              title: '',
               color: yellow,
               right: '-520px'
             }}/>
@@ -82,7 +81,7 @@ export default class IndexPage extends React.Component {
             backgroundColor={yellow}
             color={brandBlue}
             phrase={{
-              title: 'Boozy Beverages',
+              title: '',
               color: blue,
               left: '-500px'
             }}/>
@@ -121,6 +120,7 @@ export const getContent = graphql`
           id
           businessName
           headline
+          operatingHours
           hours
         }
       }

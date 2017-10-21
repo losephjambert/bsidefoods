@@ -7,7 +7,7 @@ import Media from '../styleComponents/mediaQueries'
 
 import PatioSVG from '../assets/patio.svg'
 
-const { white, pink, blue, yellow } = Colors
+const { white, pink, blue, yellow, brandBlue } = Colors
 
 const Headline = Styled.li`
   font-size: 2em;
@@ -19,10 +19,10 @@ const Headline = Styled.li`
   `}
 `
 const Hour = Styled.li`
-  font-size: 2em;
-  text-align: center;
+  font-size: 1em;
+  text-align: left;
   ${Media.forTabletLandscapeUp`
-  font-size: 3em;
+  font-size: 2em;
 `}
 `
 const Patio = Styled.div`
@@ -41,7 +41,7 @@ function BusinessInformation ({style, active, data, activate, index}) {
   return(
     <Hours headline color={white} style={{position: 'relative'}}>
       <Headline>{data.headline}</Headline>
-      { data.hours.map(( hour, i) => <Hour key={i}>{ hour }</Hour> ) }
+      { data.operatingHours.map(( hour, i) => <Hour key={i}>{ hour }</Hour> ) }
     </Hours>
   )
 }

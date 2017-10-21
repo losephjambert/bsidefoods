@@ -3,7 +3,7 @@ import Styled from 'styled-components'
 import Media from '../styleComponents/mediaQueries.js'
 import LogoFile from '../assets/logo.png'
 
-const size = 100
+const size = 90
 
 const LogoContainer = Styled.div`
   position: fixed;
