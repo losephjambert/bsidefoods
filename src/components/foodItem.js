@@ -22,7 +22,7 @@ const Name = Styled.li`
   overflow: hidden;
   position: relative;
   flex: 1 0 auto;
-  font-size: 0.8em;
+  font-size: 1em;
   &::after{
     content: '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
     position: absolute;
@@ -31,14 +31,11 @@ const Name = Styled.li`
     height: 20px;
     margin-left: 0.5em;
   }
-  ${Media.forTabletPortraitUp`
-    font-size: 1em;
-  `}
 `
 const Price = Styled.li`
   font-weight: bold;
   display: inline-flex;
-  font-size: 0.8em;
+  font-size: 1em;
   &::before{
     content:'';
     width: 0.5em;
@@ -53,35 +50,36 @@ const Price = Styled.li`
       }
     }
   }
-  ${Media.forTabletPortraitUp`
-    font-size: 1em;
-`}
+`
+const Labels = Styled.li`
+  padding-left: 10px;
 `
 const Label = Styled.li`
   width: 100%;
   flex: 1 0 100%;
-  text-indent: 10px;
-  font-size: 0.6em;
+  font-size: 0.9em;
   text-transform: lowercase;
   font-weight: bold;
   margin-top: 5px;
   &::before{
     content: '*';
   }
-  ${Media.forTabletPortraitUp`
-    font-size: 0.8em;
-  `}
+`
+const Ingredients = Styled.li`
+  width: 100%;
+  flex:  1 0 100%;
+  margin-top: 5px;
+  padding-left: 10px;
 `
 const Ingredient = Styled.li`
-width: 100%;
-flex: 1 0 100%;
-text-indent: 10px;
-font-size: 0.6em;
-text-transform: lowercase;
-margin-top: 5px;
-${Media.forTabletPortraitUp`
-  font-size: 0.8em;
-`}
+  display: inline-flex;
+  font-size: 0.9em;
+  text-transform: lowercase;
+  margin-top: 5px;
+  &:not(:last-child){
+    margin-right: 5px;
+    &::after{ content: ','; }
+  }
 `
 
 function FoodItem ({style, active, data, activate, index}) {
@@ -89,10 +87,12 @@ function FoodItem ({style, active, data, activate, index}) {
     <Wrap>
       <Name>{data.name}</Name>
       <Price> { data.prices.map(( price, i) => <span key={i}>{ price }</span> ) } </Price>
-      { data.ingredients.map(( ingredient, i) => <Ingredient key={i}>{ ingredient }</Ingredient> ) }
+      <Ingredients>
+        { data.ingredients.map(( ingredient, i) => <Ingredient key={i}>{ ingredient }</Ingredient> ) }
+      </Ingredients>
       { data.labels.map(( label, i) =>
         label.toUpperCase() !== 'NO'
-        ? <Label key={i}>{ label }</Label>
+        ? <Labels> <Label key={i}>{ label }</Label> </Labels>
         : null
       )}
     </Wrap>

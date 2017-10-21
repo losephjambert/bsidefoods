@@ -113,7 +113,7 @@ export default class ScrollContainer extends React.Component {
       for(let i=children.length-1; i>=0; i--){
         let height = Math.ceil( children[i].getBoundingClientRect().height )
         accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-100) )
-        let spaceFromTop = Math.ceil(window.innerHeight*.75 - (-i*-100) )
+        let spaceFromTop = Math.ceil(window.innerHeight*.55 - (i*-75) )
         let scrollItem = {
           height: height ,
           spaceFromTop: spaceFromTop ,
@@ -149,7 +149,7 @@ export default class ScrollContainer extends React.Component {
                 stick: this.state.currentIndex !== index && this.state.releasedPanels.includes(index),
                 position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed', 
                 top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop ,
-                zIndex: index+10 ,
+                zIndex: -index+10 ,
                 marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`
             })
         )}

@@ -7,7 +7,7 @@ const size = 100
 
 const LogoContainer = Styled.div`
   position: fixed;
-  z-index: 100;
+  z-index: -10;
   top: ${size/6}px;
   left: ${size/9}px;
   background-image: url(${LogoFile});

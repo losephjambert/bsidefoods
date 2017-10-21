@@ -26,10 +26,10 @@ const StyleContainer = Styled.div`
 
   ${Media.forTabletLandscapeUp`
     &:nth-child(1){
-      transform: translateX(10%);
+      transform: translateX(-10%);
     }
     &:nth-child(3){
-      transform: translateX(-10%);
+      transform: translateX(10%);
     }
   `}
 `
