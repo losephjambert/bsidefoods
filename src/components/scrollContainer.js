@@ -138,7 +138,7 @@ export default class ScrollContainer extends React.Component {
 
     return (
       <div>
-        <Patio 
+        <Patio
           currentPanel={this.state.currentPanel}/>
         <div ref={(node)=>this.createScrollSystem(0,node)}>
           {React.Children.map(this.props.children, (children, index) =>

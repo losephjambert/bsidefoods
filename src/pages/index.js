@@ -13,7 +13,7 @@ import Patio from '../components/patio'
 import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
 
-import cursor from '../assets/cursor.png' 
+import cursor from '../assets/cursor-main.png'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
 

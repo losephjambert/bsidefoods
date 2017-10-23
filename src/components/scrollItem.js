@@ -3,6 +3,7 @@ import Styled from 'styled-components'
 
 import Colors from '../styleVariables/colors'
 import Media from '../styleComponents/mediaQueries'
+import pointer from '../assets/cursor.png' 
 
 const {yellow, blue, pink, white, brandBlue} = Colors
 
@@ -42,6 +43,9 @@ const Item = Styled.div`
   background-color: ${props => props.backgroundColor};
   font-family:'Cornerstone';
   color:${props => props.color};
+  &:hover{
+    cursor: url(${pointer}), auto;
+  }
   ${Media.forTabletPortraitUp`
       position: relative;
       // right: ${props=>props.left}%;
