@@ -14,7 +14,7 @@ const PatternContainer = Styled.div`
     background-position: center;
     background-repeat-y: no-repeat;
   height: ${props => props.height+`px` || 'initial'};
-
+  mix-blend-mode: screen;
   ${Media.forTabletPortraitUp`
     height: ${props => props.height*1.10+`px` || 'initial'};
   `}

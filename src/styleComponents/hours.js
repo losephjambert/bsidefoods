@@ -1,7 +1,8 @@
 import Styled from 'styled-components'
 
 const Hours = Styled.ul`
-  padding: 0 15px;
+  padding: 0;
+  margin: 0;
   font-family: ${props => props.headline ? 'Cornerstone' : 'Century'};
 `
 

@@ -3,7 +3,7 @@ import Styled from 'styled-components'
 
 import Colors from '../styleVariables/colors'
 import Media from '../styleComponents/mediaQueries'
-import pointer from '../assets/cursor.png' 
+import Pointer from '../assets/cursor.png'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
 
@@ -24,15 +24,15 @@ const StyleContainer = Styled.div`
     left: calc(50% - 300px);
     right: calc(50% - 300px);
   `}
-
+  
   ${Media.forTabletLandscapeUp`
-    &:nth-child(1){
-      transform: translateX(-10%);
-    }
-    &:nth-child(3){
-      transform: translateX(10%);
-    }
-  `}
+  &:nth-child(1){
+    transform: translateX(-10%);
+  }
+  &:nth-child(3){
+    transform: translateX(10%);
+  }
+`}
 `
 
 const Item = Styled.div`
@@ -43,27 +43,28 @@ const Item = Styled.div`
   background-color: ${props => props.backgroundColor};
   font-family:'Cornerstone';
   color:${props => props.color};
+
   &:hover{
-    cursor: url(${pointer}), auto;
+    cursor: url(${Pointer}), auto;
   }
   ${Media.forTabletPortraitUp`
       position: relative;
-      // right: ${props=>props.left}%;
   `}
 `
 
 const ItemTitle = Styled.h2`
   font-size: 2em;
-  text-align: center;
-  margin-bottom: 50px;
+  text-align: left;
+  margin: 10px 0 50px;
   ${Media.forTabletPortraitUp`
     font-size: 3em;
+    margin: 25px 0 50px 20px;
   `}
 `
 const FlyOutText = Styled.p`
   position: absolute;
   z-index: 100;
-  top: 600px;
+  top: 900px;
   left: ${props=>props.left ? props.left : ''};
   right: ${props=>props.right ? props.right : ''};
   color: ${props=>props.color};
@@ -85,52 +86,48 @@ const ScrollItem = ({
   color,
   backgroundColor,
   left,
-  rotate,
   active,
   title,
   activate,
-  stick,
   position,
   top,
   zIndex,
   marginBottom,
   phrase,
+  className,
   data}) =>
 
-    <StyleContainer
-      width={600}
-      stick={stick}
-      position={position}
-      config={config}
-      top={top}
-      zIndex={zIndex}
-      marginBottom={marginBottom}
-    >
-      <Item
-        onClick={(e)=>activate(e, index, config.prevHeight)}
-        color={color}
-        backgroundColor={backgroundColor}
-        left={left}
-        rotate={rotate}
-        index={index}
-        active={active}>
-        <FlyOutText
-          color={phrase.color}
-          left={phrase.left}
-          right={phrase.right}
-          >
-          {phrase.title}
-        </FlyOutText>
-        <ItemTitle>{title}</ItemTitle>
-        {React.Children.map(data, (children, index) =>
-            React.cloneElement(children, {
-                key: index,
-                active: active,
-                activate: activate,
-                index: index
-            })
-        )}
-      </Item>
-    </StyleContainer>
+  <StyleContainer
+    className={className}
+    width={600}
+    position={position}
+    config={config}
+    top={top}
+    zIndex={zIndex}
+    marginBottom={marginBottom}>
+    <Item
+      onClick={(e)=>activate(e, index, config.prevHeight)}
+      color={color}
+      backgroundColor={backgroundColor}
+      left={left}
+      index={index}
+      active={active}>
+      <FlyOutText
+        color={phrase.color}
+        left={phrase.left}
+        right={phrase.right}>
+        {phrase.title}
+      </FlyOutText>
+      { title && <ItemTitle>{title}</ItemTitle> }
+      {React.Children.map(data, (children, index) =>
+          React.cloneElement(children, {
+              key: index,
+              active: active,
+              activate: activate,
+              index: index
+          })
+      )}
+    </Item>
+  </StyleContainer>
 
 export default ScrollItem

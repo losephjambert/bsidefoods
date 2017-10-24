@@ -1,14 +1,17 @@
 import React from 'react'
 import Scroll from 'react-scroll'
-import {Styled, injectGlobal} from 'styled-components'
+import {injectGlobal} from 'styled-components'
+import Styled from 'styled-components'
 
-import ScrollContainer from '../components/scrollContainer'
+import ScrollSystem from '../components/scrollSystem'
 import ScrollItem from '../components/scrollItem'
 import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
 import Colors from '../styleVariables/colors'
 import Patio from '../components/patio'
+import Friends from '../components/friends'
+import Booze from '../components/booze'
 
 import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
@@ -35,13 +38,30 @@ injectGlobal`
     background-color: ${white};
     cursor: url(${cursor}), auto;
   }
+
   ul{ list-style-type: none; }
+`
+
+const Container = Styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 10%;
+  z-index: -50;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `
 
 export default class IndexPage extends React.Component {
 
   handleClick = (e,index, distance) => {
-    scroll.scrollTo(distance)
+    scroll.scrollTo(distance, { smooth:true, duration: distance})
+  }
+
+  componentDidUpdate(){
+    console.log('UPDATE: index')
   }
 
   render(){
@@ -55,8 +75,14 @@ export default class IndexPage extends React.Component {
 
     return(
       <div>
-        <ScrollContainer handleClick={this.handleClick}>
+        <Container>
+          <Patio/>
+          <Booze/>
+          <Friends/>
+        </Container>
+        <ScrollSystem handleClick={this.handleClick}>
           <ScrollItem
+            className="scroll-item"
             data={b}
             backgroundColor={blue}
             color={white}
@@ -66,6 +92,7 @@ export default class IndexPage extends React.Component {
               left: '-600px'
             }}/>
           <ScrollItem
+            className="scroll-item"
             data={f}
             title='Tasty Foods'
             backgroundColor={pink}
@@ -76,6 +103,7 @@ export default class IndexPage extends React.Component {
               right: '-520px'
             }}/>
           <ScrollItem
+            className="scroll-item"
             data={d}
             title='Fine Drinks'
             backgroundColor={yellow}
@@ -85,7 +113,7 @@ export default class IndexPage extends React.Component {
               color: blue,
               left: '-500px'
             }}/>
-        </ScrollContainer>
+        </ScrollSystem>
       </div>
     )
   }

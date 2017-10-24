@@ -41,6 +41,7 @@ const Price = Styled.li`
     width: 0.5em;
     height: 100%;
     position: relative;
+    left: -1px;
     background-color: ${pink};
   }
   & > span{
@@ -61,8 +62,9 @@ const Label = Styled.li`
   text-transform: lowercase;
   font-weight: bold;
   margin-top: 5px;
-  &::before{
-    content: '*';
+  &::before,
+  &::after{
+    content: '~';
   }
 `
 const Ingredients = Styled.div`

@@ -42,6 +42,7 @@ const Price = Styled.li`
     width: 0.5em;
     height: 100%;
     position: relative;
+    left: -1px;
     background-color: ${Colors.yellow};
   }
   & > span{
@@ -55,20 +56,21 @@ const Price = Styled.li`
     font-size: 1em;
 `}
 `
+const Labels = Styled.div`
+padding-left: 10px;
+width: 100%;
+`
 const Label = Styled.li`
-  width: 100%;
-  flex: 1 0 100%;
-  text-indent: 10px;
-  font-size: 0.6em;
-  text-transform: lowercase;
-  font-weight: bold;
-  margin-top: 5px;
-  &::before{
-    content: '*';
-  }
-  ${Media.forTabletPortraitUp`
-    font-size: 0.8em;
-  `}
+width: 100%;
+flex: 1 0 100%;
+font-size: 0.9em;
+text-transform: lowercase;
+font-weight: bold;
+margin-top: 5px;
+&::before,
+&::after{
+  content: '~';
+}
 `
 
 function DrinkItem ({style, active, data, activate, index}) {
@@ -79,7 +81,7 @@ function DrinkItem ({style, active, data, activate, index}) {
       <Price> { data.prices.map(( price, i) => <span key={i}>{ price }</span> ) } </Price>
       { data.labels.map(( label, i) =>
         label.toUpperCase() !== 'NO'
-        ? <Label key={i}>{ label }</Label>
+        ? <Labels key={i}> <Label>{ label }</Label> </Labels>
         : null
       )}
     </Wrap>
