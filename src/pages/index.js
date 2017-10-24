@@ -60,10 +60,6 @@ export default class IndexPage extends React.Component {
     scroll.scrollTo(distance, { smooth:true, duration: distance})
   }
 
-  componentDidUpdate(){
-    console.log('UPDATE: index')
-  }
-
   render(){
     const FOODS = this.props.data.allContentfulFood.edges
     const DRINKS = this.props.data.allContentfulDrink.edges
@@ -74,47 +70,40 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
-      <div>
-        <Container>
-          <Patio/>
-          <Booze/>
-          <Friends/>
-        </Container>
-        <ScrollSystem handleClick={this.handleClick}>
-          <ScrollItem
-            className="scroll-item"
-            data={b}
-            backgroundColor={blue}
-            color={white}
-            phrase={{
-              title: '',
-              color: pink,
-              left: '-600px'
-            }}/>
-          <ScrollItem
-            className="scroll-item"
-            data={f}
-            title='Tasty Foods'
-            backgroundColor={pink}
-            color={brandBlue}
-            phrase={{
-              title: '',
-              color: yellow,
-              right: '-520px'
-            }}/>
-          <ScrollItem
-            className="scroll-item"
-            data={d}
-            title='Fine Drinks'
-            backgroundColor={yellow}
-            color={brandBlue}
-            phrase={{
-              title: '',
-              color: blue,
-              left: '-500px'
-            }}/>
-        </ScrollSystem>
-      </div>
+      <ScrollSystem handleClick={this.handleClick}>
+        <ScrollItem
+          className="scroll-item"
+          data={b}
+          backgroundColor={blue}
+          color={white}
+          phrase={{
+            title: '',
+            color: pink,
+            left: '-600px'
+          }}/>
+        <ScrollItem
+          className="scroll-item"
+          data={f}
+          title='Tasty Foods'
+          backgroundColor={pink}
+          color={brandBlue}
+          phrase={{
+            title: '',
+            color: yellow,
+            right: '-520px'
+          }}/>
+        <ScrollItem
+          className="scroll-item"
+          data={d}
+          title='Fine Drinks'
+          backgroundColor={yellow}
+          color={brandBlue}
+          phrase={{
+            title: '',
+            color: blue,
+            left: '-500px'
+          }}/>
+      </ScrollSystem>
     )
   }
 }
