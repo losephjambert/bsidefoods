@@ -149,7 +149,6 @@ export const getContent = graphql`
           businessName
           headline
           operatingHours
-          hours
         }
       }
     }
