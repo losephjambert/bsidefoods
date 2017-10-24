@@ -18,7 +18,7 @@ to {
 const Container = Styled.div`
   width: ${size}px;
   height: ${size}px;
-  animation: ${rotate360} 10s linear infinite;
+  animation: ${rotate360} 100s linear infinite;
   transform-origin: bottom left;
   svg{
     width: 100%;
