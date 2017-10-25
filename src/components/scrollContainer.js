@@ -7,20 +7,23 @@ export default class ScrollContainer extends React.Component {
     currentIndex: 0       ,
     direction: null       ,
     scrollItems: null     ,
-    releasedPanels: [0]   ,
-    totalHeight: null
+    releasedPanels: [0]
+  }
+
+  config={
+    scrollItems:[],
+    container:null,
+    children: null,
+    lastScrollTop:0,
+    direction: null
   }
 
   componentDidMount(){
-    if(this.props.config){
-      window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
-      this.props.config.currentIndex=0
-      this.setState(prevState => ({
-        currentPanel: this.props.config.scrollItems[0] ,
-        scrollItems: this.props.config.scrollItems,
-        totalHeight: parseInt(this.props.config.container.style.height)
-      }))
-    }
+    window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
+    this.setState(prevState => ({
+      currentPanel: this.props.config.scrollItems[0] ,
+      scrollItems: this.props.config.scrollItems
+    }))
   }
 
   componentWillUnmount() {
@@ -33,10 +36,10 @@ export default class ScrollContainer extends React.Component {
       children
     }=this.props.config
     const {
-      currentPanel    ,
-      currentIndex    ,
-      direction       ,
-      scrollItems     ,
+      currentPanel ,
+      currentIndex ,
+      direction ,
+      scrollItems ,
       releasedPanels
     }=this.state
 
@@ -56,6 +59,7 @@ export default class ScrollContainer extends React.Component {
             currentPanel:prevState.scrollItems[scrollIndex]               ,
             releasedPanels: [...prevState.releasedPanels, scrollIndex]
           }))
+
         }
     }
     //handle panel behavior while user scrolls UP the page
@@ -78,13 +82,13 @@ export default class ScrollContainer extends React.Component {
 
   handleDirection = (e) =>{
     const scrollDistance=window.scrollY
-    const {lastScrollTop}=this.props.config
+    
 
-    scrollDistance > lastScrollTop
+    scrollDistance > this.config.lastScrollTop
       ? this.setState(prevState => ({direction:'down'}))
       : this.setState(prevState => ({direction:'up'}))
 
-    this.props.config.lastScrollTop=scrollDistance
+    this.config.lastScrollTop=scrollDistance
   }
 
   handleScroll = (e) =>{
@@ -92,18 +96,16 @@ export default class ScrollContainer extends React.Component {
     requestAnimationFrame((e)=>this.handlePanes(e))
   }
 
-
   render() {
-    const {handleClick, className}=this.props
+    const {className, config}=this.props
 
     return (
       <div>
-        <div className={className}>
+        <div className={className} style={{height: `${config.height}px`}}>
           {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {
               key: index ,
               active: this.state.currentIndex === index ,
-              activate: handleClick ,
               index: index ,
               left: index*10 ,
               config: this.props.config.scrollItems[index] ,

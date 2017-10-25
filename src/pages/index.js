@@ -70,8 +70,9 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
-      <ScrollSystem handleClick={this.handleClick}>
+      <ScrollSystem>
         <ScrollItem
+          handleClick={this.handleClick}
           className="scroll-item"
           data={b}
           backgroundColor={blue}
@@ -82,6 +83,7 @@ export default class IndexPage extends React.Component {
             left: '-600px'
           }}/>
         <ScrollItem
+          handleClick={this.handleClick}
           className="scroll-item"
           data={f}
           title='Tasty Foods'
@@ -93,6 +95,7 @@ export default class IndexPage extends React.Component {
             right: '-520px'
           }}/>
         <ScrollItem
+          handleClick={this.handleClick}
           className="scroll-item"
           data={d}
           title='Fine Drinks'

@@ -88,7 +88,7 @@ const ScrollItem = ({
   left,
   active,
   title,
-  activate,
+  handleClick,
   position,
   top,
   zIndex,
@@ -106,7 +106,7 @@ const ScrollItem = ({
     zIndex={zIndex}
     marginBottom={marginBottom}>
     <Item
-      onClick={(e)=>activate(e, index, config.prevHeight)}
+      onClick={(e)=>handleClick(e, index, config.prevHeight)}
       color={color}
       backgroundColor={backgroundColor}
       left={left}
@@ -123,7 +123,7 @@ const ScrollItem = ({
           React.cloneElement(children, {
               key: index,
               active: active,
-              activate: activate,
+              handleClick: handleClick,
               index: index
           })
       )}

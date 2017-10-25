@@ -3,27 +3,20 @@ import React from 'react'
 import ScrollContainer from './scrollContainer'
 
 export default class ScrollSystem extends React.Component {
-
+  
   config={
     lastScrollTop:0       ,
     direction: null       ,
     currentIndex: null    ,
     container: null       ,
     children: null        ,
-    scrollItems:[]        ,
-    show: false
+    scrollItems:[] ,
+    height: null
   }
-
-  componentDidMount(){
-   this.createScrollSystem(0,document.getElementsByClassName('scroll-container')[0])
-  }
-
-  shouldComponentUpdate(){ return false }
 
   createScrollSystem = (accumulator, node) => {
     this.config.scrollItems=[]
     const {scrollItems} = this.config
-    let nodeHeight = null
 
     if(node){
       let children = document.getElementsByClassName('scroll-item')
@@ -50,22 +43,18 @@ export default class ScrollSystem extends React.Component {
       }
       this.config.container=node
       this.config.children=children
-      nodeHeight=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight)
-      node.style.height=`${nodeHeight}px`
+      this.config.height=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight)
     }
   }
 
   render() {
 
-    const {handleClick}=this.props
-
     return (
       <div>
         <ScrollContainer
+          ref={(node)=>this.createScrollSystem(0,node)}
           className="scroll-container"
-          config={this.config}
-          handleClick={handleClick}
-        >
+          config={this.config}>
           {this.props.children}
         </ScrollContainer>
       </div>
