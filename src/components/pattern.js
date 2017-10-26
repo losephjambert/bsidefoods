@@ -9,7 +9,6 @@ const PatternContainer = Styled.div`
   right: 0;
   z-index: -10;
   height: ${props => props.height+`px` || 'initial'};
-  mix-blend-mode: screen;
   ${Media.forTabletPortraitUp`
     height: ${props => props.height*1.10+`px` || 'initial'};
   `}
