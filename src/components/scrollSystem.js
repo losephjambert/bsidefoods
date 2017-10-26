@@ -49,6 +49,7 @@ export default class ScrollSystem extends React.Component {
     return (
       <div>
         <ScrollContainer
+          handleClick={this.props.handleClick}
           ref={(node)=>this.createScrollSystem(0,node)}
           className="scroll-container"
           config={this.config}>

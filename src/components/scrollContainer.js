@@ -89,10 +89,18 @@ export default class ScrollContainer extends React.Component {
   }
 
   render() {
-    const {className, config}=this.props
+    const {className, config, handleClick}=this.props
+    const styles={
+      position: 'fixed',
+      top: '300px',
+      left: '200px',
+      zIndex: 9999,
+      opacity: this.state.currentIndex===2 ? '1' : '0'
+    }
 
     return (
       <div>
+        <div style={styles} onClick={(e)=>handleClick(e)}>Back to Top</div>
         <div className={className} style={{height: `${config.height}px`}}>
           {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {

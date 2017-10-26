@@ -57,7 +57,12 @@ const Container = Styled.div`
 export default class IndexPage extends React.Component {
 
   handleClick = (e,index, distance) => {
+    distance = distance || 500
     scroll.scrollTo(distance, { smooth:true, duration: distance})
+  }
+
+  scrollToTop = (e) => {
+    scroll.scrollToTop()
   }
 
   render(){
@@ -70,7 +75,7 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
-      <ScrollSystem>
+      <ScrollSystem handleClick={this.scrollToTop}>
         <ScrollItem
           handleClick={this.handleClick}
           className="scroll-item"

@@ -16,8 +16,7 @@ const Wrap = Menu.extend`
 const Name = Styled.li`
   padding-left: 2px;
   text-transform: uppercase;
-  letter-spacing: .025em;
-  font-weight: bold;
+  letter-spacing: .05em;
   display: inline-flex;
   overflow: hidden;
   position: relative;
