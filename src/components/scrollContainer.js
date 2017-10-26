@@ -9,9 +9,6 @@ export default class ScrollContainer extends React.Component {
     releasedPanels: [0]
   }
 
-  direction=null
-  lastScrollTop=0
-
   componentDidMount(){
     window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
     this.setState(prevState => ({
@@ -74,10 +71,11 @@ export default class ScrollContainer extends React.Component {
     }
   }
 
+  direction=null
+  lastScrollTop=0
   handleDirection = (e) =>{
     const scrollDistance=window.scrollY
     
-
     scrollDistance > this.lastScrollTop
       ? this.direction='down'
       : this.direction='up'

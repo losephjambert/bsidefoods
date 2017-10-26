@@ -5,9 +5,6 @@ import ScrollContainer from './scrollContainer'
 export default class ScrollSystem extends React.Component {
   
   config={
-    lastScrollTop:0       ,
-    direction: null       ,
-    currentIndex: null    ,
     container: null       ,
     children: null        ,
     scrollItems:[] ,
