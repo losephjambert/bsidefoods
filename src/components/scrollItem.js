@@ -6,12 +6,26 @@ import Media from '../styleComponents/mediaQueries'
 import Pointer from '../assets/cursor.png'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
+const size = 540
 
 if (typeof window === 'undefined') { global.window = {} }
 
+const openStyles = `
+ &::after{
+   content:'';
+   position: absolute;
+   bottom: 50px;
+   right: 50px;
+   width: 100px;
+   height: 100px;
+   z-index: 9999;
+   background-color: gold;
+ }
+`
+
 const StyleContainer = Styled.div`
-  width: 600px;
-  max-width: 100%;
+  width: 100%;
+  max-width: ${size}px;
   min-height: 600px;
   margin: 0;
   padding: 0;
@@ -19,10 +33,12 @@ const StyleContainer = Styled.div`
   margin-bottom: ${props=>props.marginBottom};
   position: ${props=>props.position};
   top: ${props=>props.top}px;
+  ${props=>props.open ? openStyles : null}
+
 
   ${Media.forTabletPortraitUp`
-    left: calc(50% - 300px);
-    right: calc(50% - 300px);
+    left: calc(50% - ${size/2}px);
+    right: calc(50% - ${size/2}px);
   `}
   
   ${Media.forTabletLandscapeUp`
@@ -36,7 +52,8 @@ const StyleContainer = Styled.div`
 `
 
 const Item = Styled.div`
-  max-width: 600px;
+  min-width: 300px;
+  max-width: 95%;
   margin: auto;
   padding: 25px;
   min-height: 600px;
@@ -48,6 +65,7 @@ const Item = Styled.div`
     cursor: url(${Pointer}), auto;
   }
   ${Media.forTabletPortraitUp`
+      width: 100%;
       position: relative;
   `}
 `
@@ -77,11 +95,12 @@ const ScrollItem = ({
   zIndex,
   marginBottom,
   className,
-  data}) =>
+  data,
+  open}) =>
 
   <StyleContainer
+    open={open}
     className={className}
-    width={600}
     position={position}
     config={config}
     top={top}

@@ -62,13 +62,12 @@ width: 100%;
 const Label = Styled.li`
 width: 100%;
 flex: 1 0 100%;
-font-size: 0.9em;
+font-size: 0.85em;
 text-transform: lowercase;
 font-weight: bold;
 margin-top: 5px;
-&::before,
-&::after{
-  content: '~';
+&::before{
+  content: '*';
 }
 `
 

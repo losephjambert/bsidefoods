@@ -2,6 +2,7 @@ import React from 'react'
 import Scroll from 'react-scroll'
 import {injectGlobal} from 'styled-components'
 import Styled from 'styled-components'
+import moment from 'moment'
 
 import ScrollSystem from '../components/scrollSystem'
 import ScrollItem from '../components/scrollItem'
@@ -56,6 +57,14 @@ const Container = Styled.div`
 
 export default class IndexPage extends React.Component {
 
+  state={
+    open: null
+  }
+
+  componentWillMount(){
+    this.handleOpenHours()
+  }
+
   handleClick = (e,index, distance) => {
     distance = distance || 500
     scroll.scrollTo(distance, { smooth:true, duration: distance})
@@ -65,12 +74,32 @@ export default class IndexPage extends React.Component {
     scroll.scrollToTop()
   }
 
+  handleOpenHours(){
+    switch(moment().format('dddd').toUpperCase()) {
+      case('THURSDAY'):
+        this.setState(prevState=>({ openIndex: 0 }))
+        break
+      case('FRIDAY'):
+        this.setState(prevState=>({ openIndex: 1 }))
+        break
+      case('SATURDAY'):
+        this.setState(prevState=>({ openIndex: 2 }))
+        break
+      case('SUNDAY'):
+        this.setState(prevState=>({ openIndex: 3 }))
+        break
+      default:
+        this.setState(prevState=>({ openIndex: false }))
+
+    }
+  }
+
   render(){
     const FOODS = this.props.data.allContentfulFood.edges
     const DRINKS = this.props.data.allContentfulDrink.edges
     const BUSINESS_INFORMATION = this.props.data.allContentfulBusinessInformation.edges
 
-    let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={node} /> ))
+    let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={node} openIndex={this.state.openIndex} /> ))
     let f = (FOODS.map(( {node}, i) => <FoodItem key={i} data={node} /> ))
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 

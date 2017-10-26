@@ -40,7 +40,7 @@ export default class ScrollSystem extends React.Component {
       }
       this.config.container=node
       this.config.children=children
-      this.config.height=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight)
+      this.config.height=Math.ceil(scrollItems[scrollItems.length-1].scrollHeight+100)
     }
   }
 
