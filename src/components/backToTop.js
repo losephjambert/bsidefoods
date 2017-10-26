@@ -18,15 +18,21 @@ to {
 `;
 const Container = Styled.div`
   position: fixed;
-  bottom: 15px;
-  left: 58px;
+  bottom: 5px;
+  right: 8px;
   z-index: 9999;
   display: ${props=>props.show ? 'block' : 'none'};
   opacity: ${props=>props.show ? 1 : 0};
   transition: 300ms;
-  width: 75px;
-  animation: ${rotate360} 5s linear infinite;
+  width: 50px;
+  animation: ${rotate360} 50s linear infinite;
   transform-origin: center;
+  mix-blend-mode: darken;
+  ${Media.forTabletLandscapeUp`
+    bottom: 30px;
+    right: 58px;
+    width: 100px;
+  `}
   &:hover{
     cursor: url(${Pointer}), auto;
     svg{
@@ -34,16 +40,19 @@ const Container = Styled.div`
     }
   }
   svg{
+    background-color: ${brandBlue};
+    padding: 5px;
+    border-radius: 100%;
     transition: 100ms;
     width: 100%;
     height: 100%;
     g > path{
-      fill: ${brandBlue};
+      fill: ${white};
     }
+    ${Media.forTabletLandscapeUp`
+      z-index: 100;
+    `}
   }
-  ${Media.forTabletLandscapeUp`
-    z-index: 100;
-  `}
 `
 const BackToTop = (props) =>
   <Container show={props.show} onClick={(e)=>props.handleClick(e)}>
