@@ -12,7 +12,7 @@ const Headline = Styled.li`
   margin: 10px 0 50px;
   text-align: left;
   line-height: 1;
-  ${Media.forTabletLandscapeUp`
+  ${Media.forTabletPortraitUp`
     font-size: 3em;
     margin: 25px 0 50px 25px;
   `}
@@ -21,7 +21,7 @@ const Hour = Styled.li`
   font-size: 1.35em;
   text-align: left;
   margin-bottom: 20px;
-  ${Media.forTabletLandscapeUp`
+  ${Media.forTabletPortraitUp`
     font-size: 2em;
     margin-left: 25px;
   `}

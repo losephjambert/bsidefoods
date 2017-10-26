@@ -5,18 +5,12 @@ export default class ScrollContainer extends React.Component {
   state={
     currentPanel: null    ,
     currentIndex: 0       ,
-    direction: null       ,
     scrollItems: null     ,
     releasedPanels: [0]
   }
 
-  config={
-    scrollItems:[],
-    container:null,
-    children: null,
-    lastScrollTop:0,
-    direction: null
-  }
+  direction=null
+  lastScrollTop=0
 
   componentDidMount(){
     window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
@@ -38,10 +32,10 @@ export default class ScrollContainer extends React.Component {
     const {
       currentPanel ,
       currentIndex ,
-      direction ,
       scrollItems ,
       releasedPanels
     }=this.state
+    const {direction}=this
 
     let length = children.length-1
 
@@ -52,7 +46,7 @@ export default class ScrollContainer extends React.Component {
         if(
         scrollIndex < length &&
         scrollItems[scrollIndex] === currentPanel &&
-        children[scrollIndex].getBoundingClientRect().bottom <= 0 ){
+        children[scrollIndex].getBoundingClientRect().bottom <= 0){
           scrollIndex+=1
           this.setState(prevState => ({
             currentIndex:scrollIndex                                      ,
@@ -69,7 +63,7 @@ export default class ScrollContainer extends React.Component {
           scrollIndex > 0 &&
           currentIndex > 0 &&
           scrollItems[scrollIndex] === currentPanel &&
-          children[scrollIndex - 1].getBoundingClientRect().bottom >= 0 ){
+          children[scrollIndex - 1].getBoundingClientRect().bottom >= 0){
             scrollIndex-=1
             this.setState(prevState => ({
               currentIndex:scrollIndex                                                                  ,
@@ -84,11 +78,11 @@ export default class ScrollContainer extends React.Component {
     const scrollDistance=window.scrollY
     
 
-    scrollDistance > this.config.lastScrollTop
-      ? this.setState(prevState => ({direction:'down'}))
-      : this.setState(prevState => ({direction:'up'}))
+    scrollDistance > this.lastScrollTop
+      ? this.direction='down'
+      : this.direction='up'
 
-    this.config.lastScrollTop=scrollDistance
+    this.lastScrollTop=scrollDistance
   }
 
   handleScroll = (e) =>{

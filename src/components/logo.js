@@ -10,10 +10,6 @@ const LogoContainer = Styled.div`
   z-index: -10;
   top: ${size/6}px;
   left: ${size/9}px;
-  background-image: url(${LogoFile});
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
   width: ${size}px;
   height: ${size}px;
   ${Media.forBigPhonesUp`
@@ -33,9 +29,14 @@ const LogoContainer = Styled.div`
     height: ${size*1.75}px;
   `}
 `
+const Image = Styled.img`
+  width: 100%;
+`
 
 const Logo = () =>
 
-  <LogoContainer />
+  <LogoContainer>
+    <Image src={LogoFile} />
+  </LogoContainer>
 
 export default Logo

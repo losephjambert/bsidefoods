@@ -76,36 +76,21 @@ export default class IndexPage extends React.Component {
           className="scroll-item"
           data={b}
           backgroundColor={blue}
-          color={white}
-          phrase={{
-            title: '',
-            color: pink,
-            left: '-600px'
-          }}/>
+          color={white}/>
         <ScrollItem
           handleClick={this.handleClick}
           className="scroll-item"
           data={f}
           title='Tasty Foods'
           backgroundColor={pink}
-          color={brandBlue}
-          phrase={{
-            title: '',
-            color: yellow,
-            right: '-520px'
-          }}/>
+          color={brandBlue}/>
         <ScrollItem
           handleClick={this.handleClick}
           className="scroll-item"
           data={d}
           title='Fine Drinks'
           backgroundColor={yellow}
-          color={brandBlue}
-          phrase={{
-            title: '',
-            color: blue,
-            left: '-500px'
-          }}/>
+          color={brandBlue}/>
       </ScrollSystem>
     )
   }

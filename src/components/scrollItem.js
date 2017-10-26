@@ -61,23 +61,6 @@ const ItemTitle = Styled.h2`
     margin: 25px 0 50px 20px;
   `}
 `
-const FlyOutText = Styled.p`
-  position: absolute;
-  z-index: 100;
-  top: 900px;
-  left: ${props=>props.left ? props.left : ''};
-  right: ${props=>props.right ? props.right : ''};
-  color: ${props=>props.color};
-  transform: rotate(90deg);
-  transform-origin: center;
-  font-size: 3em;
-  letter-spacing: .1em;
-  min-width: 800px;
-  margin: 0;
-  ${Media.forTabletLandscapeUp`
-
-  `}
-`
 
 const ScrollItem = ({
   style,
@@ -93,7 +76,6 @@ const ScrollItem = ({
   top,
   zIndex,
   marginBottom,
-  phrase,
   className,
   data}) =>
 
@@ -112,12 +94,6 @@ const ScrollItem = ({
       left={left}
       index={index}
       active={active}>
-      <FlyOutText
-        color={phrase.color}
-        left={phrase.left}
-        right={phrase.right}>
-        {phrase.title}
-      </FlyOutText>
       { title && <ItemTitle>{title}</ItemTitle> }
       {React.Children.map(data, (children, index) =>
           React.cloneElement(children, {
