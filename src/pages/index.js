@@ -58,11 +58,13 @@ const Container = Styled.div`
 export default class IndexPage extends React.Component {
 
   state={
-    open: null
+    openIndex: null,
+    days: []
   }
 
   componentWillMount(){
-    this.handleOpenHours()
+    let hours = this.props.data.allContentfulBusinessInformation.edges[0].node.operatingHours
+    this.handleOpenHours(hours)
   }
 
   handleClick = (e,index, distance) => {
@@ -74,24 +76,52 @@ export default class IndexPage extends React.Component {
     scroll.scrollToTop()
   }
 
-  handleOpenHours(){
-    switch(moment().format('dddd').toUpperCase()) {
-      case('THURSDAY'):
-        this.setState(prevState=>({ openIndex: 0 }))
-        break
-      case('FRIDAY'):
-        this.setState(prevState=>({ openIndex: 1 }))
-        break
-      case('SATURDAY'):
-        this.setState(prevState=>({ openIndex: 2 }))
-        break
-      case('SUNDAY'):
-        this.setState(prevState=>({ openIndex: 3 }))
-        break
-      default:
-        this.setState(prevState=>({ openIndex: false }))
+  handleOpenHours(arr){
+    const daysOfTheWeek = [ 'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY' ]
+    let text = arr.join('').toUpperCase()
+    let match
+    let days = []
+    let currentDay
 
+    for(let i=daysOfTheWeek.length-1;i>=0;i--){
+      match = text.includes(daysOfTheWeek[i])
+      match ? days.push({day:daysOfTheWeek[i], index: i, print: ''}) : null
     }
+
+    days.forEach(function(element, i) {
+      if(moment().format('dddd').toUpperCase() === element.day){
+        element.print=arr[element.index-1]
+        currentDay=element
+      }
+    })
+    this.setState(prevState=>({currentDay: currentDay}))
+
+    // switch(moment().format('dddd').toUpperCase()) {
+    //   case('SUNDAY'):
+    //     this.setState(prevState=>({ openIndex: 0 }))
+    //     break
+    //   case('MONDAY'):
+    //     this.setState(prevState=>({ openIndex: 1 }))
+    //     break
+    //   case('TUESDAY'):
+    //     this.setState(prevState=>({ openIndex: 2 }))
+    //     break
+    //   case('WEDNESDAY'):
+    //     this.setState(prevState=>({ openIndex: 3 }))
+    //     break
+    //   case('THURSDAY'):
+    //     this.setState(prevState=>({ openIndex: 4 }))
+    //     break
+    //   case('FRIDAY'):
+    //     this.setState(prevState=>({ openIndex: 5 }))
+    //     break
+    //   case('SATURDAY'):
+    //     this.setState(prevState=>({ openIndex: 6 }))
+    //     break
+    //   default:
+    //     this.setState(prevState=>({ openIndex: false }))
+
+    // }
   }
 
   render(){

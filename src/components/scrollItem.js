@@ -6,7 +6,7 @@ import Media from '../styleComponents/mediaQueries'
 import Pointer from '../assets/cursor.png'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
-const size = 540
+const size = 550
 
 if (typeof window === 'undefined') { global.window = {} }
 

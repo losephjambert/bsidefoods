@@ -24,7 +24,7 @@ const bounce = keyframes`
 const bounceStyles = `
   span{
     display: inline-flex;
-    animation: ${bounce} 4s ease infinite alternate;
+    animation: ${bounce} 500ms linear infinite alternate;
   }
 `
 const Headline = Styled.li`
