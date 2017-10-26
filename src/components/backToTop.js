@@ -27,7 +27,6 @@ const Container = Styled.div`
   width: 50px;
   animation: ${rotate360} 50s linear infinite;
   transform-origin: center;
-  mix-blend-mode: darken;
   ${Media.forTabletLandscapeUp`
     bottom: 30px;
     right: 58px;
