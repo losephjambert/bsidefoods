@@ -11,21 +11,17 @@ const bounce = keyframes`
 0% {
   transform: translate3d(0,0,0);
 }
-33% {
+50% {
   transform: translate3d(0,3px,0);
-}
-66% {
-  transform: translate3d(0,-3px,0);
 }
 100% {
   transform: translate3d(0,0,0);
 }
 `
-const bounceStyles = `
-  span{
-    display: inline-flex;
-    animation: ${bounce} 500ms linear infinite alternate;
-  }
+const Letter = Styled.span`
+  display: inline-flex;
+  ${props=>props.active ? `animation: ${bounce} 1600ms ease infinite;` : null}
+  animation-delay: ${props=>props.delay}s;
 `
 const Headline = Styled.li`
   font-size: 2em;
@@ -45,19 +41,18 @@ const Hour = Styled.li`
     font-size: 2em;
     margin-left: 25px;
   `}
-  ${props=>props.openIndex ? bounceStyles : null}
 `
 
-function BusinessInformation ({style, active, data, activate, index, openIndex}) {
+function BusinessInformation ({style, active, data, activate, index}) {
   
   let days = []
   let wrappedCharacters = []
 
-  data.operatingHours.forEach(function(element, i) {
-    for(let j=element.length-1;j>=0;j--){
-      wrappedCharacters.unshift(<span key={j}>{element[j]}</span>)
+  data.operatingHours.forEach(function(hour, i) {
+    for(let j=hour.text.length-1;j>=0;j--){
+      wrappedCharacters.unshift(<Letter key={j} delay={j/i/2} active={hour.isOpen}>{hour.text[j]}</Letter>)
     }
-    days.push(<Hour key={i} openIndex={openIndex===i}>{wrappedCharacters}</Hour>)
+    days.unshift(<Hour key={i} >{wrappedCharacters}</Hour>)
     wrappedCharacters=[]
   })
 

@@ -58,70 +58,54 @@ const Container = Styled.div`
 export default class IndexPage extends React.Component {
 
   state={
-    openIndex: null,
-    days: []
+    operatingHours: []
   }
 
   componentWillMount(){
-    let hours = this.props.data.allContentfulBusinessInformation.edges[0].node.operatingHours
-    this.handleOpenHours(hours)
+    this.handleOpenHours(this.props.data.allContentfulBusinessInformation.edges[0].node.operatingHours)
   }
 
   handleClick = (e,index, distance) => {
-    distance = distance || 500
-    scroll.scrollTo(distance, { smooth:true, duration: distance})
+    distance = distance || 0
+    scroll.scrollTo(distance, { smooth:true, duration: 1000})
   }
 
   scrollToTop = (e) => {
-    scroll.scrollToTop()
+    scroll.scrollToTop( {duration: 1000} )
   }
 
   handleOpenHours(arr){
     const daysOfTheWeek = [ 'SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY' ]
+    const checkArray = [ 'SU', 'MO', 'TUE', 'WE', 'TH', 'FR', 'SA' ]
     let text = arr.join('').toUpperCase()
     let match
     let days = []
-    let currentDay
+    let day = {
+      text: '',
+      isOpen: false
+    }
+    let currentDay={}
+    let today=moment().format('dddd').toUpperCase()
 
-    for(let i=daysOfTheWeek.length-1;i>=0;i--){
-      match = text.includes(daysOfTheWeek[i])
-      match ? days.push({day:daysOfTheWeek[i], index: i, print: ''}) : null
+    for(let i=checkArray.length-1;i>=0;i--){
+      match = text.includes(checkArray[i])
+      if(match && today===daysOfTheWeek[i]){
+        currentDay.name=daysOfTheWeek[i]
+      }
     }
 
-    days.forEach(function(element, i) {
-      if(moment().format('dddd').toUpperCase() === element.day){
-        element.print=arr[element.index-1]
-        currentDay=element
+    for(let i=arr.length-1;i>=0;i--){
+      day.text=arr[i]
+      day.isOpen=false
+      days.push(day)
+      if(arr[i].toUpperCase().includes(currentDay.name)){
+        day.isOpen=true
       }
-    })
-    this.setState(prevState=>({currentDay: currentDay}))
+      day={}
+    }
 
-    // switch(moment().format('dddd').toUpperCase()) {
-    //   case('SUNDAY'):
-    //     this.setState(prevState=>({ openIndex: 0 }))
-    //     break
-    //   case('MONDAY'):
-    //     this.setState(prevState=>({ openIndex: 1 }))
-    //     break
-    //   case('TUESDAY'):
-    //     this.setState(prevState=>({ openIndex: 2 }))
-    //     break
-    //   case('WEDNESDAY'):
-    //     this.setState(prevState=>({ openIndex: 3 }))
-    //     break
-    //   case('THURSDAY'):
-    //     this.setState(prevState=>({ openIndex: 4 }))
-    //     break
-    //   case('FRIDAY'):
-    //     this.setState(prevState=>({ openIndex: 5 }))
-    //     break
-    //   case('SATURDAY'):
-    //     this.setState(prevState=>({ openIndex: 6 }))
-    //     break
-    //   default:
-    //     this.setState(prevState=>({ openIndex: false }))
+    this.setState(prevState=>({operatingHours: days}))
 
-    // }
   }
 
   render(){
@@ -129,7 +113,7 @@ export default class IndexPage extends React.Component {
     const DRINKS = this.props.data.allContentfulDrink.edges
     const BUSINESS_INFORMATION = this.props.data.allContentfulBusinessInformation.edges
 
-    let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={node} openIndex={this.state.openIndex} /> ))
+    let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={ {businessName: node.businessName, headline: node.headline, operatingHours: this.state.operatingHours, id: node.id} } /> ))
     let f = (FOODS.map(( {node}, i) => <FoodItem key={i} data={node} /> ))
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
