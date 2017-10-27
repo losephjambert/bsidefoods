@@ -51,7 +51,6 @@ export default class ScrollContainer extends React.Component {
             currentPanel:prevState.scrollItems[scrollIndex]               ,
             releasedPanels: [...prevState.releasedPanels, scrollIndex]
           }))
-
         }
     }
     //handle panel behavior while user scrolls UP the page
@@ -105,7 +104,7 @@ export default class ScrollContainer extends React.Component {
               config: this.props.config.scrollItems[index] ,
               position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed', 
               top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop ,
-              zIndex: -index+10 ,
+              zIndex: index+10 ,
               marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`
             })
           )}

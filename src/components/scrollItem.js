@@ -6,7 +6,7 @@ import Media from '../styleComponents/mediaQueries'
 import Pointer from '../assets/cursor.png'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
-const size = 550
+const size = 600
 
 if (typeof window === 'undefined') { global.window = {} }
 
@@ -43,10 +43,10 @@ const StyleContainer = Styled.div`
   
   ${Media.forTabletLandscapeUp`
   &:nth-child(1){
-    transform: translateX(-10%);
+    transform: translateX(10%);
   }
   &:nth-child(3){
-    transform: translateX(10%);
+    transform: translateX(-10%);
   }
 `}
 `
@@ -66,6 +66,7 @@ const Item = Styled.div`
   }
   ${Media.forTabletPortraitUp`
       width: 100%;
+      max-width: 100%;
       position: relative;
   `}
 `
