@@ -10,9 +10,8 @@ import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
 import Colors from '../styleVariables/colors'
-import Patio from '../components/patio'
-import Friends from '../components/friends'
-import Booze from '../components/booze'
+import AnimatePath from '../components/animatePath'
+
 
 import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
@@ -118,6 +117,8 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
+      <div className="ass-to-mouth">
+      <AnimatePath/>
       <ScrollSystem handleClick={this.scrollToTop}>
         <ScrollItem
           handleClick={this.handleClick}
@@ -140,6 +141,7 @@ export default class IndexPage extends React.Component {
           backgroundColor={yellow}
           color={brandBlue}/>
       </ScrollSystem>
+      </div>
     )
   }
 }
