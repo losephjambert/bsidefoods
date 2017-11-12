@@ -17,7 +17,6 @@ const Name = Styled.li`
   font-weight: bold;
   padding-left: 2px;
   text-transform: uppercase;
-  letter-spacing: .05em;
   display: inline-flex;
   overflow: hidden;
   position: relative;
