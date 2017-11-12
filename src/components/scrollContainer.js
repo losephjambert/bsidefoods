@@ -101,7 +101,7 @@ export default class ScrollContainer extends React.Component {
               active: this.state.currentIndex === index,
               index: index,
               left: index*10,
-              config: this.props.config.scrollItems[index],
+              config: this.state.scrollItems && this.state.scrollItems[index],
               position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed', 
               top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop,
               zIndex: index+10,
