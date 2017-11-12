@@ -12,7 +12,7 @@ const HeaderContainer = Styled.div`
 
 const Header = () =>
   <HeaderContainer>
-    <Pattern height={80}/>
+    <Pattern height={80} top={5}/>
     <Logo/>
   </HeaderContainer>
 

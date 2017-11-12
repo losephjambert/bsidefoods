@@ -11,7 +11,7 @@ export default class ScrollContainer extends React.Component {
   }
 
   componentDidMount(){
-    window.addEventListener('scroll',  (e)=>this.handleScroll(e) )
+    window.addEventListener('scroll', (e)=>this.handleScroll(e) )
     this.setState(prevState => ({
       currentPanel: this.props.config.scrollItems[0] ,
       scrollItems: this.props.config.scrollItems
@@ -93,18 +93,18 @@ export default class ScrollContainer extends React.Component {
 
     return (
       <div>
-        { this.state.currentIndex > 0 && <BackToTop show={this.state.currentIndex > 0} handleClick={handleClick}/> }
+        <BackToTop show={this.state.currentIndex > 0} handleClick={handleClick}/>
         <div className={className} style={{height: `${config.height}px`}}>
           {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {
-              key: index ,
-              active: this.state.currentIndex === index ,
-              index: index ,
-              left: index*10 ,
-              config: this.props.config.scrollItems[index] ,
+              key: index,
+              active: this.state.currentIndex === index,
+              index: index,
+              left: index*10,
+              config: this.props.config.scrollItems[index],
               position: this.state.releasedPanels.includes(index) ? 'relative' : 'fixed', 
-              top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop ,
-              zIndex: index+10 ,
+              top: this.state.scrollItems && this.state.scrollItems[index].spaceFromTop,
+              zIndex: index+10,
               marginBottom: `${this.state.scrollItems && this.state.scrollItems[index].spaceFromTop}px`
             })
           )}

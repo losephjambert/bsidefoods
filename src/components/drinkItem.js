@@ -12,6 +12,7 @@ const Wrap = Menu.extend`
 `
 
 const Name = Styled.li`
+  font-weight: bold;
   padding-left: 2px;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -19,7 +20,7 @@ const Name = Styled.li`
   overflow: hidden;
   position: relative;
   flex: 1 0 auto;
-  font-size: 0.8em;
+  font-size: .6em;
   &::after{
     content: '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
     position: absolute;
@@ -28,14 +29,17 @@ const Name = Styled.li`
     height: 20px;
     margin-left: 0.5em;
   }
-  ${Media.forTabletPortraitUp`
-    font-size: 1em;
+  ${Media.forMediumPhonesUp`
+    font-size: .8em;
+  `}
+  ${Media.forBigPhonesUp`
+    font-size: .9em;
   `}
 `
 const Price = Styled.li`
   display: inline-flex;
   font-weight: bold;
-  font-size: 0.8em;
+  font-size: 0.6em;
   &::before{
     content:'';
     width: 0.5em;
@@ -51,24 +55,32 @@ const Price = Styled.li`
       }
     }
   }
-  ${Media.forTabletPortraitUp`
-    font-size: 1em;
-`}
+  ${Media.forMediumPhonesUp`
+    font-size: .8em;
+  `}
+  ${Media.forBigPhonesUp`
+    font-size: .9em;
+  `}
 `
 const Labels = Styled.div`
 padding-left: 10px;
 width: 100%;
 `
 const Label = Styled.li`
-width: 100%;
-flex: 1 0 100%;
-font-size: 0.85em;
-text-transform: lowercase;
-font-weight: bold;
-margin-top: 5px;
-&::before{
-  content: '*';
-}
+  width: 100%;
+  flex: 1 0 100%;
+  font-size: 0.65em;
+  text-transform: lowercase;
+  margin-top: 5px;
+  &::before{
+    content: '*';
+  }
+  ${Media.forMediumPhonesUp`
+    font-size: .8em;
+  `}
+  ${Media.forBigPhonesUp`
+    font-size: .9em;
+  `}
 `
 
 function DrinkItem ({style, active, data, activate, index}) {

@@ -60,6 +60,7 @@ const Item = Styled.div`
   background-color: ${props => props.backgroundColor};
   font-family:'Cornerstone';
   color:${props => props.color};
+  box-shadow: 0 -4px 6px -6px black;
 
   &:hover{
     cursor: url(${Pointer}), auto;
@@ -106,7 +107,8 @@ const ScrollItem = ({
     config={config}
     top={top}
     zIndex={zIndex}
-    marginBottom={marginBottom}>
+    marginBottom={marginBottom}
+    index={index}>
     <Item
       onClick={(e)=>handleClick(e, index, config.prevHeight)}
       color={color}

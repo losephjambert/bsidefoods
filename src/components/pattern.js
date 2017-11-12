@@ -4,7 +4,7 @@ import Media from '../styleComponents/mediaQueries.js'
 
 const PatternContainer = Styled.div`
   position: fixed;
-  top: 0;
+  top: ${props=>props.top ? props.top : 0}px;
   left: 0;
   right: 0;
   z-index: -10;
@@ -16,7 +16,8 @@ const PatternContainer = Styled.div`
 
 const Pattern = (props) =>
   <PatternContainer 
-    height={props.height}>
+    height={props.height}
+    top={props.top}>
 
     <svg width="1277px" height="84px" viewBox="0 0 1277 84" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

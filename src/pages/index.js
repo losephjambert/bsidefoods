@@ -117,8 +117,6 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
-      <div className="ass-to-mouth">
-      <AnimatePath/>
       <ScrollSystem handleClick={this.scrollToTop}>
         <ScrollItem
           handleClick={this.handleClick}
@@ -141,7 +139,6 @@ export default class IndexPage extends React.Component {
           backgroundColor={yellow}
           color={brandBlue}/>
       </ScrollSystem>
-      </div>
     )
   }
 }

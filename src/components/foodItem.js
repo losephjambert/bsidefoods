@@ -14,6 +14,7 @@ const Wrap = Menu.extend`
 `
 
 const Name = Styled.li`
+  font-weight: bold;
   padding-left: 2px;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -21,7 +22,7 @@ const Name = Styled.li`
   overflow: hidden;
   position: relative;
   flex: 1 0 auto;
-  font-size: 1em;
+  font-size: .6em;
   &::after{
     content: '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
     position: absolute;
@@ -30,11 +31,17 @@ const Name = Styled.li`
     height: 20px;
     margin-left: 0.5em;
   }
+  ${Media.forMediumPhonesUp`
+    font-size: .8em;
+  `}
+  ${Media.forBigPhonesUp`
+    font-size: .9em;
+  `}
 `
 const Price = Styled.li`
   font-weight: bold;
   display: inline-flex;
-  font-size: 1em;
+  font-size: .6em;
   &::before{
     content:'';
     width: 0.5em;
@@ -50,6 +57,12 @@ const Price = Styled.li`
       }
     }
   }
+  ${Media.forMediumPhonesUp`
+    font-size: .8em;
+  `}
+  ${Media.forBigPhonesUp`
+    font-size: .9em;
+  `}
 `
 const Labels = Styled.div`
   padding-left: 10px;
@@ -57,29 +70,41 @@ const Labels = Styled.div`
 const Label = Styled.li`
   width: 100%;
   flex: 1 0 100%;
-  font-size: 0.85em;
+  font-size: 0.65em;
   text-transform: lowercase;
-  font-weight: bold;
   margin-top: 5px;
   &::before{
     content: '*';
   }
+  ${Media.forMediumPhonesUp`
+    font-size: .8em;
+  `}
+  ${Media.forBigPhonesUp`
+    font-size: .9em;
+  `}
 `
 const Ingredients = Styled.div`
   width: 100%;
   flex:  1 0 100%;
   margin-top: 5px;
   padding-left: 10px;
+  line-height: 1;
 `
 const Ingredient = Styled.li`
   display: inline-flex;
-  font-size: 0.9em;
+  font-size: 0.65em;
   text-transform: lowercase;
   margin-top: 5px;
   &:not(:last-child){
     margin-right: 5px;
     &::after{ content: ','; }
   }
+  ${Media.forMediumPhonesUp`
+    font-size: .8em;
+  `}
+  ${Media.forBigPhonesUp`
+    font-size: .9em;
+  `}
 `
 
 function FoodItem ({style, active, data, activate, index}) {

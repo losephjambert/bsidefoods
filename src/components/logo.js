@@ -8,7 +8,7 @@ const size = 84
 const LogoContainer = Styled.div`
   position: fixed;
   z-index: -10;
-  top: ${size/6}px;
+  top: ${size/3}px;
   left: ${size/9}px;
   width: ${size}px;
   height: ${size}px;
