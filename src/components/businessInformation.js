@@ -20,6 +20,7 @@ const bounce = keyframes`
 `
 const Letter = Styled.span`
   display: inline-flex;
+  margin-right: .04em;
   ${props=>props.active ? `animation: ${bounce} 2000ms ease infinite;` : null}
   animation-delay: ${props=>props.delay}s;
 `
@@ -28,21 +29,22 @@ const Headline = Styled.li`
   margin: 10px 0 50px;
   text-align: center;
   line-height: 1;
+  font-family: Cornerstone;
   ${Media.forTabletPortraitUp`
     font-size: 3em;
-    margin: 25px 0 50px 25px;
+    margin: 25px 0 50px 0px;
   `}
 `
 const Hour = Styled.li`
   font-size: 1.35em;
   text-align: center;
   margin-bottom: 20px;
+  font-family: Century Bold;
   ${Media.forBigPhonesUp`
     font-size: 1.5em;
   `}
   ${Media.forTabletPortraitUp`
-    font-size: 2em;
-    // margin-left: 25px;
+    font-size: 1.6em;
   `}
 `
 

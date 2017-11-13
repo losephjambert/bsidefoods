@@ -1,39 +1,36 @@
 import React from 'react'
-import Styled from 'styled-components'
+import Styled, {keyframes} from 'styled-components'
 
 import Colors from '../styleVariables/colors'
 import Media from '../styleComponents/mediaQueries'
 import Pointer from '../assets/cursor.png'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
-const size = 600
+const size = 550
+const upDown = keyframes`
+0% {
+  transform: translate3d(0,0,0);
+}
+50% {
+  transform: translate3d(0,-25px,0);
+}
+100% {
+  transform: translate3d(0,0,0);
+}
+`;
 
 if (typeof window === 'undefined') { global.window = {} }
-
-const openStyles = `
- &::after{
-   content:'';
-   position: absolute;
-   bottom: 50px;
-   right: 50px;
-   width: 100px;
-   height: 100px;
-   z-index: 9999;
-   background-color: gold;
- }
-`
 
 const StyleContainer = Styled.div`
   width: 100%;
   max-width: ${size}px;
-  min-height: 600px;
+  min-height: ${size}px;
   margin: 0;
   padding: 0;
   z-index: ${props=>props.zIndex};
   margin-bottom: ${props=>props.marginBottom};
   position: ${props=>props.position};
   top: ${props=>props.top}px;
-  ${props=>props.open ? openStyles : null}
 
 
   ${Media.forTabletPortraitUp`
@@ -61,10 +58,15 @@ const Item = Styled.div`
   font-family:'Cornerstone';
   color:${props => props.color};
   box-shadow: 0 -4px 6px -6px black;
+  transition: 300ms;
 
-  &:hover{
-    cursor: url(${Pointer}), auto;
-  }
+  ${Media.forTabletPortraitUp`
+    &:hover{
+      cursor: url(${Pointer}), auto;
+      animation: upDown 300ms linear forwards;
+    }
+  `}
+
   ${Media.forTabletPortraitUp`
       width: 100%;
       max-width: 100%;
@@ -97,11 +99,9 @@ const ScrollItem = ({
   zIndex,
   marginBottom,
   className,
-  data,
-  open}) =>
+  data}) =>
 
   <StyleContainer
-    open={open}
     className={className}
     position={position}
     config={config}

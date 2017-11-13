@@ -9,12 +9,14 @@ const Wrap = Menu.extend`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  font-family: Century Italic;
 `
 
 const Name = Styled.li`
   font-weight: bold;
   padding-left: 2px;
   text-transform: uppercase;
+  letter-spacing: .04em;
   display: inline-flex;
   overflow: hidden;
   position: relative;

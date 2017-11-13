@@ -1,5 +1,9 @@
 import React from 'react'
 import BackToTop from './backToTop'
+import Foods from '../components/foods'
+import Colors from '../styleVariables/colors'
+
+const {yellow, blue, pink, white, brandBlue} = Colors
 
 export default class ScrollContainer extends React.Component {
 
@@ -7,14 +11,16 @@ export default class ScrollContainer extends React.Component {
     currentPanel: null    ,
     currentIndex: 0       ,
     scrollItems: null     ,
-    releasedPanels: [0]
+    releasedPanels: [0]   ,
+    loading: true
   }
 
   componentDidMount(){
     window.addEventListener('scroll', (e)=>this.handleScroll(e) )
     this.setState(prevState => ({
       currentPanel: this.props.config.scrollItems[0] ,
-      scrollItems: this.props.config.scrollItems
+      scrollItems: this.props.config.scrollItems     ,
+      loading: !this.state.loading
     }))
   }
 
@@ -92,8 +98,9 @@ export default class ScrollContainer extends React.Component {
     const {className, config, handleClick}=this.props
 
     return (
-      <div>
+      <div style={{opacity: this.state.loading ? 0 : 1, transition: '1500ms'}}>
         <BackToTop show={this.state.currentIndex > 0} handleClick={handleClick}/>
+        <Foods index={this.state.currentIndex}/>
         <div className={className} style={{height: `${config.height}px`}}>
           {React.Children.map(this.props.children, (children, index) =>
             React.cloneElement(children, {

@@ -10,10 +10,11 @@ import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
 import Colors from '../styleVariables/colors'
-import AnimatePath from '../components/animatePath'
-
+import Loader from '../components/loader'
 
 import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
+import Century from '../assets/fonts/century/CenturySchL-Roma.ttf'
+import CenturyBold from '../assets/fonts/century/CenturySchL-Bold.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
 
 import cursor from '../assets/cursor-main.png'
@@ -25,8 +26,16 @@ let Link = Scroll.Link
 
 injectGlobal`
   @font-face {
-    font-family: 'Century';
+    font-family: 'Century Italic';
     src: url(${CenturyItalic});
+  }
+  @font-face {
+    font-family: 'Century';
+    src: url(${Century});
+  }
+  @font-face {
+    font-family: 'Century Bold';
+    src: url(${CenturyBold});
   }
   @font-face {
     font-family: 'Cornerstone';
@@ -117,28 +126,30 @@ export default class IndexPage extends React.Component {
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
-      <ScrollSystem handleClick={this.scrollToTop}>
-        <ScrollItem
-          handleClick={this.handleClick}
-          className="scroll-item"
-          data={b}
-          backgroundColor={blue}
-          color={white}/>
-        <ScrollItem
-          handleClick={this.handleClick}
-          className="scroll-item"
-          data={f}
-          title='Tasty Foods'
-          backgroundColor={pink}
-          color={brandBlue}/>
-        <ScrollItem
-          handleClick={this.handleClick}
-          className="scroll-item"
-          data={d}
-          title='Fine Drinks'
-          backgroundColor={yellow}
-          color={brandBlue}/>
-      </ScrollSystem>
+      <div>
+        <ScrollSystem handleClick={this.scrollToTop}>
+          <ScrollItem
+            handleClick={this.handleClick}
+            className="scroll-item"
+            data={b}
+            backgroundColor={blue}
+            color={white}/>
+          <ScrollItem
+            handleClick={this.handleClick}
+            className="scroll-item"
+            data={f}
+            title='Tasty Foods'
+            backgroundColor={pink}
+            color={brandBlue}/>
+          <ScrollItem
+            handleClick={this.handleClick}
+            className="scroll-item"
+            data={d}
+            title='Fine Drinks'
+            backgroundColor={yellow}
+            color={brandBlue}/>
+        </ScrollSystem>
+      </div>
     )
   }
 }
