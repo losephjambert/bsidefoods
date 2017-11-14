@@ -39,7 +39,7 @@ const Hour = Styled.li`
   font-size: 1.35em;
   text-align: center;
   margin-bottom: 20px;
-  font-family: Century Bold;
+  font-family: Century;
   ${Media.forBigPhonesUp`
     font-size: 1.5em;
   `}

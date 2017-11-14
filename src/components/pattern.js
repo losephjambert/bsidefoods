@@ -9,8 +9,16 @@ const PatternContainer = Styled.div`
   right: 0;
   z-index: -10;
   height: ${props => props.height+`px` || 'initial'};
+  svg{
+      height: 84px;
+  }
   ${Media.forTabletPortraitUp`
     height: ${props => props.height*1.10+`px` || 'initial'};
+  `}
+  ${Media.forDesktopUp`
+    svg{
+        height: initial;
+    }
   `}
 `
 
@@ -19,7 +27,7 @@ const Pattern = (props) =>
     height={props.height}
     top={props.top}>
 
-    <svg width="1277px" height="84px" viewBox="0 0 1277 84" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 1277 84" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="Food-Menu" transform="translate(-2.000000, -9.000000)" fillRule="nonzero" fill="#1E467E">
               <g id="Group-4" transform="translate(-35.000000, 9.000000)">

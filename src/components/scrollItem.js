@@ -32,27 +32,29 @@ const StyleContainer = Styled.div`
   position: ${props=>props.position};
   top: ${props=>props.top}px;
 
-
   ${Media.forTabletPortraitUp`
     left: calc(50% - ${size/2}px);
     right: calc(50% - ${size/2}px);
   `}
   
   ${Media.forTabletLandscapeUp`
-  &:nth-child(1){
-    transform: translateX(10%);
-  }
-  &:nth-child(3){
-    transform: translateX(-10%);
-  }
-`}
+    &:nth-child(1){
+      transform: translateX(10%);
+    }
+    &:nth-child(3){
+      transform: translateX(-10%);
+    }
+  `}
+  ${Media.forDesktopUp`
+    max-width: ${size*1.15}px;
+  `}
 `
 
 const Item = Styled.div`
   min-width: 300px;
   max-width: 95%;
   margin: auto;
-  padding: 25px;
+  padding: 15px;
   min-height: 600px;
   background-color: ${props => props.backgroundColor};
   font-family:'Cornerstone';
@@ -61,6 +63,7 @@ const Item = Styled.div`
   transition: 300ms;
 
   ${Media.forTabletPortraitUp`
+    padding: 25px;
     &:hover{
       cursor: url(${Pointer}), auto;
       animation: upDown 300ms linear forwards;
@@ -68,9 +71,12 @@ const Item = Styled.div`
   `}
 
   ${Media.forTabletPortraitUp`
-      width: 100%;
-      max-width: 100%;
-      position: relative;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  `}
+  ${Media.forDesktopUp`
+    padding: 50px;
   `}
 `
 
