@@ -12,15 +12,15 @@ export default class ScrollContainer extends React.Component {
     currentIndex: 0       ,
     scrollItems: null     ,
     releasedPanels: [0]   ,
-    loading: false
+    loading: true
   }
 
   componentDidMount(){
     window.addEventListener('scroll', (e)=>this.handleScroll(e) )
     this.setState(prevState => ({
       currentPanel: this.props.config.scrollItems[0] ,
-      scrollItems: this.props.config.scrollItems     
-      // loading: !this.state.loading
+      scrollItems: this.props.config.scrollItems     ,
+      loading: !this.state.loading
     }))
   }
 
