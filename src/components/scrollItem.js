@@ -46,7 +46,7 @@ const StyleContainer = Styled.div`
     }
   `}
   ${Media.forDesktopUp`
-    max-width: ${size*1.15}px;
+    max-width: ${size*1.05}px;
   `}
 `
 
@@ -55,7 +55,7 @@ const Item = Styled.div`
   max-width: 95%;
   margin: auto;
   padding: 15px;
-  min-height: 600px;
+  min-height: ${size}px;
   background-color: ${props => props.backgroundColor};
   font-family:'Cornerstone';
   color:${props => props.color};
@@ -73,6 +73,7 @@ const Item = Styled.div`
   ${Media.forTabletPortraitUp`
     width: 100%;
     max-width: 100%;
+    min-height: ${size*1.15}px;
     position: relative;
   `}
   ${Media.forDesktopUp`

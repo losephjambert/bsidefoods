@@ -26,7 +26,7 @@ export default class ScrollSystem extends React.Component {
         let height = Math.ceil( children[i].getBoundingClientRect().height )
         accumulator=accumulator+height+Math.ceil(window.innerHeight*.75 - (i*-100) )
         if(window.innerHeight > 600 && window.innerWidth > 600){
-          spaceFromTop = Math.ceil(window.innerHeight*.88- (i*85) + adjuster )
+          spaceFromTop = Math.ceil(window.innerHeight*.85- (i*94) + adjuster )
         } else{
           if(i===2){ adjuster = -190 }
           spaceFromTop = Math.ceil(window.innerHeight*.88 - (i*66) + adjuster )

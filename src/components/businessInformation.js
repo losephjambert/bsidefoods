@@ -41,15 +41,19 @@ const Hour = Styled.li`
   margin-bottom: 20px;
   font-family: Century;
   ${Media.forBigPhonesUp`
-    font-size: 1.5em;
+    font-size: 1.45em;
   `}
-  ${Media.forTabletPortraitUp`
-    font-size: 1.6em;
-  `}
+`
+const Address = Styled.li`
+  font-family: Century;
+  margin-top: 150px;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 1em;
 `
 
 function BusinessInformation ({style, active, data, activate, index}) {
-  
+
   let days = []
   let wrappedCharacters = []
 
@@ -65,6 +69,7 @@ function BusinessInformation ({style, active, data, activate, index}) {
     <Hours headline color={white} style={{position: 'relative'}}>
       <Headline>{data.headline}</Headline>
       {days}
+      <Address><a href={data.addressLink} target="_blank">{data.address}</a></Address>
     </Hours>
   )
 }

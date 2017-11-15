@@ -18,6 +18,8 @@ import CenturyBold from '../assets/fonts/century/CenturySchL-Bold.ttf'
 import Cornerstone from '../assets/fonts/cornerstone/Cornerstone.ttf'
 
 import cursor from '../assets/cursor-main.png'
+import cursorHover from '../assets/cursor.png'
+import underline from '../assets/underline.svg'
 
 const {yellow, blue, pink, white, brandBlue} = Colors
 
@@ -41,14 +43,54 @@ injectGlobal`
     font-family: 'Cornerstone';
     src: url(${Cornerstone});
   }
+
+  ::-moz-selection { 
+    background: ${brandBlue};
+    color: ${white};
+  }
+  ::selection { 
+    background: ${brandBlue};
+    color: ${white};
+  }
+
   *{ box-sizing: border-box; }
-  html{ font-size: 18px; }
+  html{
+    font-size: 18px;
+  }
   body{ 
     background-color: ${white};
     cursor: url(${cursor}), auto;
   }
 
   ul{ list-style-type: none; }
+
+  a{
+    color: ${white};
+    transition: 300ms;
+    text-decoration: none;
+    position: relative;
+    &:visited,
+    &:active{
+      color: ${white};}
+    &:hover{
+      color: ${brandBlue};
+      cursor: url(${cursorHover}), auto; 
+      &::after{
+        opacity: 1;
+      }
+    }
+    &::after{
+      transition: inherit;
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-image: url(${underline});
+      opacity: 0;
+    }
+  }
 `
 
 const Container = Styled.div`
@@ -121,7 +163,7 @@ export default class IndexPage extends React.Component {
     const DRINKS = this.props.data.allContentfulDrink.edges
     const BUSINESS_INFORMATION = this.props.data.allContentfulBusinessInformation.edges
 
-    let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={ {businessName: node.businessName, headline: node.headline, operatingHours: this.state.operatingHours, id: node.id} } /> ))
+    let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={ {businessName: node.businessName, headline: node.headline, operatingHours: this.state.operatingHours, address: node.address, addressLink: node.googleMapsAddress, id: node.id} } /> ))
     let f = (FOODS.map(( {node}, i) => <FoodItem key={i} data={node} /> ))
     let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
 
@@ -183,6 +225,8 @@ export const getContent = graphql`
           id
           businessName
           headline
+          address
+          googleMapsAddress
           operatingHours
         }
       }
