@@ -159,13 +159,15 @@ export default class IndexPage extends React.Component {
   }
 
   render(){
-    const FOODS = this.props.data.allContentfulFood.edges
-    const DRINKS = this.props.data.allContentfulDrink.edges
+    const FOODS = this.props.data.allContentfulFoodMenu.edges[0].node.availableDishes
+    const DRINKS = this.props.data.allContentfulDrinkMenu.edges[0].node.availableDrinks
     const BUSINESS_INFORMATION = this.props.data.allContentfulBusinessInformation.edges
+    const FOOD_TITLE = this.props.data.allContentfulFoodMenu.edges[0].node.title
+    const DRINK_TITLE = this.props.data.allContentfulDrinkMenu.edges[0].node.title
 
     let b = (BUSINESS_INFORMATION.map(( {node}, i) => <BusinessInformation key={i} data={ {businessName: node.businessName, headline: node.headline, operatingHours: this.state.operatingHours, address: node.address, addressLink: node.googleMapsAddress, id: node.id} } /> ))
-    let f = (FOODS.map(( {node}, i) => <FoodItem key={i} data={node} /> ))
-    let d = (DRINKS.map(( {node}, i) => <DrinkItem key={i} data={node} /> ))
+    let f = (FOODS.map(( node, i) => <FoodItem key={i} data={node} /> ))
+    let d = (DRINKS.map(( node, i) => <DrinkItem key={i} data={node} /> ))
 
     return(
       <div>
@@ -180,17 +182,17 @@ export default class IndexPage extends React.Component {
             handleClick={this.handleClick}
             className="scroll-item"
             data={f}
-            title='Tasty Foods'
+            title={FOOD_TITLE}
             backgroundColor={pink}
             color={brandBlue}/>
           <ScrollItem
             handleClick={this.handleClick}
             className="scroll-item"
             data={d}
-            title='Fine Drinks'
+            title={DRINK_TITLE}
             backgroundColor={yellow}
             color={brandBlue}/>
-        </ScrollSystem>
+        </ScrollSystem> 
       </div>
     )
   }
@@ -198,27 +200,6 @@ export default class IndexPage extends React.Component {
 
 export const getContent = graphql`
   query GetContent {
-    allContentfulFood{
-      edges {
-        node{
-          id
-          name
-          ingredients
-          labels
-          prices
-        }
-      }
-    }
-    allContentfulDrink{
-      edges {
-        node{
-          id
-          name
-          labels
-          prices
-        }
-      }
-    }
     allContentfulBusinessInformation{
       edges {
         node{
@@ -228,6 +209,33 @@ export const getContent = graphql`
           address
           googleMapsAddress
           operatingHours
+        }
+      }
+    }
+    allContentfulDrinkMenu{
+      edges {
+        node{
+          id
+          title
+          availableDrinks{
+            name
+            labels
+            prices
+          }
+        }
+      }
+    }
+    allContentfulFoodMenu{
+      edges {
+        node{
+          id
+          title
+          availableDishes{
+            name
+            ingredients
+            labels
+            prices
+          }
         }
       }
     }
