@@ -10,7 +10,6 @@ import FoodItem from '../components/foodItem'
 import DrinkItem from '../components/drinkItem'
 import BusinessInformation from '../components/businessInformation'
 import Colors from '../styleVariables/colors'
-import Loader from '../components/loader'
 
 import CenturyItalic from '../assets/fonts/century/CenturySchL-Ital.ttf'
 import Century from '../assets/fonts/century/CenturySchL-Roma.ttf'
@@ -112,7 +111,11 @@ export default class IndexPage extends React.Component {
   }
 
   componentWillMount(){
-    this.handleOpenHours(this.props.data.allContentfulBusinessInformation.edges[0].node.operatingHours)
+    let arr = []
+    this.props.data.allContentfulBusinessInformation.edges[0].node.businessHours.forEach(function(element) {
+      arr.push(element.title)
+    }, this)
+    this.handleOpenHours(arr)
   }
 
   handleClick = (e,index, distance) => {
@@ -208,7 +211,9 @@ export const getContent = graphql`
           headline
           address
           googleMapsAddress
-          operatingHours
+          businessHours{
+            title
+          }
         }
       }
     }
@@ -218,6 +223,7 @@ export const getContent = graphql`
           id
           title
           availableDrinks{
+            id
             name
             labels
             prices
@@ -231,6 +237,7 @@ export const getContent = graphql`
           id
           title
           availableDishes{
+            id
             name
             ingredients
             labels

@@ -1,8 +1,15 @@
 import React from 'react'
 
-const NotFoundPage = () =>
-  <div>
-    <h1>404 :-/</h1>
-  </div>
+export default class NotFoundPage extends React.Component{
 
-export default NotFoundPage
+  componentWillMount(){
+    window.location.assign("http://staging.bside.cool")
+  }
+
+  render(){
+    return(
+      <div>
+      </div>
+    )
+  }
+}

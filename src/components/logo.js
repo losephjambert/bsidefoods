@@ -3,7 +3,7 @@ import Styled from 'styled-components'
 import Media from '../styleComponents/mediaQueries.js'
 import LogoFile from '../assets/logo.png'
 
-const size = 84
+const size = 79
 
 const LogoContainer = Styled.div`
   position: fixed;
@@ -31,12 +31,13 @@ const LogoContainer = Styled.div`
 `
 const Image = Styled.img`
   width: 100%;
+  opacity: ${props=>props.loading ? 0 : 1};
 `
 
-const Logo = () =>
+const Logo = (props) =>
 
   <LogoContainer>
-    <Image src={LogoFile} />
+    <Image src={LogoFile} loading={props.loading} />
   </LogoContainer>
 
 export default Logo

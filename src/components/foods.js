@@ -10,7 +10,7 @@ const size = 160
 const Container = Styled.div`
   position: fixed;
   top: 220px;
-  left: 60px;
+  left: 55px;
   z-index: 0;
   width: 50px;
   opacity: 0;
