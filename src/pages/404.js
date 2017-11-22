@@ -1,11 +1,11 @@
 import React from 'react'
 
-if (typeof window === 'undefined') { global.window = {} }
-
 export default class NotFoundPage extends React.Component{
 
   componentWillMount(){
-    window.location.assign("http://staging.bside.cool")
+    if (typeof window !== 'undefined') { 
+      window.location.assign("http://staging.bside.cool")
+    }
   }
 
   render(){
