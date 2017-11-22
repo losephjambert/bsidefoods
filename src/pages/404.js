@@ -1,5 +1,7 @@
 import React from 'react'
 
+if (typeof window === 'undefined') { global.window = {} }
+
 export default class NotFoundPage extends React.Component{
 
   componentWillMount(){
