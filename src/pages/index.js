@@ -68,7 +68,6 @@ injectGlobal`
     transition: 300ms;
     text-decoration: none;
     position: relative;
-    &:visited,
     &:active{
       color: ${white};}
     &:hover{
