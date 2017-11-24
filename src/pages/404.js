@@ -7,7 +7,9 @@ if (typeof window === 'undefined') {
 export default class NotFoundPage extends React.Component{
 
   componentWillMount(){
-    window.location.assign("http://staging.bside.cool")
+    if (window.location !== 'undefined'){
+      window.location.assign("http://staging.bside.cool")
+    }
   }
 
   render(){
