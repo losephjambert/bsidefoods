@@ -1,30 +1,42 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
+import Styled from 'styled-components'
 
-import './index.css'
+import Header from '../components/header.js'
+import 'normalize.css';
 
-const Header = () =>
-  <div/>
+const Container = Styled.div`
 
-const TemplateWrapper = ({ children }) =>
-  <div>
+`
+
+const TemplateWrapper = ({ children, data }) =>
+  <Container>
     <Helmet
-      title="B-side Foods | Seattle"
+      title={data.site.siteMetadata.title}
       meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
+        { name: 'description', content: 'b-side foods. an every day breakfast and lunch place on capitol hill in seattle, washington' },
+        { name: 'keywords', content: 'breakfast, lunch, eggs, food, seattle, capitol hill, bowls, snacks, coffee, neighborhood, sandwich, brunch' },
+        { name: 'robots', content: 'index, follow' },
+        { name: 'revisit-after', content: '1 month' },
+        { name: 'msapplication-tap-highlight', content: 'no' },
+        { name: 'theme-color', content: '#2F3BA2' },
       ]}
     />
     <Header />
     <div>
       {children()}
     </div>
-  </div>
-
-TemplateWrapper.propTypes = {
-  children: PropTypes.func,
-}
+  </Container>
 
 export default TemplateWrapper
+
+export const query = graphql`
+  query LayoutQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`

@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `B~Side Foods | Seattle`
   },
   plugins: [
     {
@@ -10,7 +10,15 @@ module.exports = {
         accessToken: `f05698ad5ef43d41df517331205acf50ba500938b5dd6ca1354b3fb201713b76`,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-76756414-3'
+      },
+    },
     `gatsby-plugin-react-helmet`,
-     'gatsby-plugin-catch-links',
+     `gatsby-plugin-catch-links`,
+     `gatsby-plugin-styled-components`,
+     `gatsby-plugin-favicon`,
   ],
 }
