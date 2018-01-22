@@ -22,14 +22,6 @@ const Name = Styled.li`
   position: relative;
   flex: 1 0 auto;
   font-size: .6em;
-  &::after{
-    content: '. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
-    position: absolute;
-    top: 0px;
-    width: 1500px;
-    height: 20px;
-    margin-left: 0.5em;
-  }
   ${Media.forMediumPhonesUp`
     font-size: .8em;
   `}
@@ -39,6 +31,7 @@ const Name = Styled.li`
 `
 const Price = Styled.li`
   display: inline-flex;
+  display: none;
   font-weight: bold;
   font-size: 0.6em;
   &::before{
