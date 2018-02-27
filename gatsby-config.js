@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `B~Side Foods | Seattle`
+    title: `B~Side Foods | Seattle, WA`
   },
   plugins: [
     {
