@@ -1,6 +1,7 @@
 import {css, styled} from 'styled-components'
 
 const sizes = {
+  forMediumPhonesUp: 360,
   forBigPhonesUp: 414,
   forTabletPortraitUp: 600,
   forTabletLandscapeUp: 900,

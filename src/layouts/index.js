@@ -2,13 +2,13 @@ import React from 'react'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import Styled from 'styled-components'
+
 import Header from '../components/header.js'
+import 'normalize.css';
 
 const Container = Styled.div`
 
 `
-
-import 'normalize.css';
 
 const TemplateWrapper = ({ children, data }) =>
   <Container>

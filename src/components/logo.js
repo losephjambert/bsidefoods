@@ -3,16 +3,13 @@ import Styled from 'styled-components'
 import Media from '../styleComponents/mediaQueries.js'
 import LogoFile from '../assets/logo.png'
 
-const size = 100
+const size = 79
 
 const LogoContainer = Styled.div`
   position: fixed;
-  top: ${size/6}px;
+  z-index: -10;
+  top: ${size/3}px;
   left: ${size/9}px;
-  background-image: url(${LogoFile});
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
   width: ${size}px;
   height: ${size}px;
   ${Media.forBigPhonesUp`
@@ -22,8 +19,8 @@ const LogoContainer = Styled.div`
     height: ${size*1.15}px;
   `}
   ${Media.forTabletPortraitUp`
-    top: ${size/2}px;
-    left: ${size/2}px;
+    top: ${size/3}px;
+    left: ${size/4}px;
     width: ${size*1.7}px;
     height: ${size*1.7}px;
   `}
@@ -32,9 +29,15 @@ const LogoContainer = Styled.div`
     height: ${size*1.75}px;
   `}
 `
+const Image = Styled.img`
+  width: 100%;
+  opacity: ${props=>props.loading ? 0 : 1};
+`
 
-const Logo = () =>
+const Logo = (props) =>
 
-  <LogoContainer />
+  <LogoContainer>
+    <Image src={LogoFile} loading={props.loading} />
+  </LogoContainer>
 
 export default Logo

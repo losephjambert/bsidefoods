@@ -1,13 +1,14 @@
 import Styled from 'styled-components'
 
+import Media from '../styleComponents/mediaQueries'
+
 const Menu = Styled.ul`
   max-width: 600px;
-  margin: 0 auto;
-  padding: 25px;
-  font-family: ${props => props.headline ? 'Cornerstone' : 'Century'};
-  background-color: ${props => props.backgroundColor};
-  color: #1E467E;
-  &:hover{cursor:pointer;}
+  margin: 0 auto 40px;
+  padding: 0;
+  ${Media.forTabletPortraitUp`
+    padding: 0 15px;
+  `}
 `
 
 export default Menu
